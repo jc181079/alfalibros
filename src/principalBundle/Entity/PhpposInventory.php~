@@ -1,0 +1,77 @@
+<?php
+
+namespace principalBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * PhpposInventory
+ *
+ * @ORM\Table(name="phppos_inventory", indexes={@ORM\Index(name="phppos_inventory_ibfk_1", columns={"trans_items"}), @ORM\Index(name="phppos_inventory_ibfk_2", columns={"trans_user"}), @ORM\Index(name="location_id", columns={"location_id"})})
+ * @ORM\Entity
+ */
+class PhpposInventory
+{
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="trans_date", type="datetime", nullable=false)
+     */
+    private $transDate = 'CURRENT_TIMESTAMP';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="trans_comment", type="text", length=65535, nullable=false)
+     */
+    private $transComment;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="trans_inventory", type="decimal", precision=23, scale=10, nullable=false)
+     */
+    private $transInventory = '0.0000000000';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="trans_id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $transId;
+
+    /**
+     * @var \principalBundle\Entity\PhpposLocations
+     *
+     * @ORM\ManyToOne(targetEntity="principalBundle\Entity\PhpposLocations")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="location_id", referencedColumnName="location_id")
+     * })
+     */
+    private $location;
+
+    /**
+     * @var \principalBundle\Entity\PhpposEmployees
+     *
+     * @ORM\ManyToOne(targetEntity="principalBundle\Entity\PhpposEmployees")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="trans_user", referencedColumnName="person_id")
+     * })
+     */
+    private $transUser;
+
+    /**
+     * @var \principalBundle\Entity\PhpposItems
+     *
+     * @ORM\ManyToOne(targetEntity="principalBundle\Entity\PhpposItems")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="trans_items", referencedColumnName="item_id")
+     * })
+     */
+    private $transItems;
+
+
+}
+

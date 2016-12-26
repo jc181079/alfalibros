@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="principalBundle\Entity\PhpposLocations" table="phppos_locations">
+    <indexes>
+      <index name="deleted" columns="deleted"/>
+      <index name="full_search" columns="name,address,phone,email"/>
+      <index name="name_search" columns="name"/>
+      <index name="address_search" columns="address"/>
+      <index name="phone_search" columns="phone"/>
+      <index name="email_search" columns="email"/>
+    </indexes>
+    <id name="locationId" type="integer" column="location_id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="name" type="text" column="name" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="address" type="text" column="address" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="phone" type="text" column="phone" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="fax" type="text" column="fax" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="email" type="text" column="email" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="color" type="text" column="color" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="returnPolicy" type="text" column="return_policy" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="receiveStockAlert" type="text" column="receive_stock_alert" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="stockAlertEmail" type="text" column="stock_alert_email" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="timezone" type="text" column="timezone" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="mailchimpApiKey" type="text" column="mailchimp_api_key" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="enableCreditCardProcessing" type="text" column="enable_credit_card_processing" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="creditCardProcessor" type="text" column="credit_card_processor" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="hostedCheckoutMerchantId" type="text" column="hosted_checkout_merchant_id" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="hostedCheckoutMerchantPassword" type="text" column="hosted_checkout_merchant_password" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="emvMerchantId" type="text" column="emv_merchant_id" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="listenerPort" type="text" column="listener_port" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="comPort" type="text" column="com_port" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="stripePublic" type="text" column="stripe_public" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="stripePrivate" type="text" column="stripe_private" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="stripeCurrencyCode" type="text" column="stripe_currency_code" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="braintreeMerchantId" type="text" column="braintree_merchant_id" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="braintreePublicKey" type="text" column="braintree_public_key" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="braintreePrivateKey" type="text" column="braintree_private_key" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="defaultTax1Rate" type="text" column="default_tax_1_rate" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="defaultTax1Name" type="text" column="default_tax_1_name" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="defaultTax2Rate" type="text" column="default_tax_2_rate" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="defaultTax2Name" type="text" column="default_tax_2_name" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="defaultTax2Cumulative" type="text" column="default_tax_2_cumulative" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="defaultTax3Rate" type="text" column="default_tax_3_rate" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="defaultTax3Name" type="text" column="default_tax_3_name" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="defaultTax4Rate" type="text" column="default_tax_4_rate" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="defaultTax4Name" type="text" column="default_tax_4_name" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="defaultTax5Rate" type="text" column="default_tax_5_rate" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="defaultTax5Name" type="text" column="default_tax_5_name" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="deleted" type="integer" column="deleted" nullable="true">
+      <options>
+        <option name="unsigned"/>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <many-to-many field="item" target-entity="PhpposItems" inversed-by="location" fetch="LAZY">
+      <join-table name="phppos_location_items">
+        <join-columns>
+          <join-column name="location_id" referenced-column-name="location_id"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="item_id" referenced-column-name="item_id"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+    <many-to-many field="itemKit" target-entity="PhpposItemKits" inversed-by="location" fetch="LAZY">
+      <join-table name="phppos_location_item_kits">
+        <join-columns>
+          <join-column name="location_id" referenced-column-name="location_id"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="item_kit_id" referenced-column-name="item_kit_id"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+    <many-to-many field="employee" target-entity="PhpposEmployees" mapped-by="location" fetch="LAZY"/>
+  </entity>
+</doctrine-mapping>

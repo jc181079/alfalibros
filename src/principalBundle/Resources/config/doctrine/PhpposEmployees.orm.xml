@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="principalBundle\Entity\PhpposEmployees" table="phppos_employees">
+    <indexes>
+      <index name="person_id" columns="person_id"/>
+      <index name="deleted" columns="deleted"/>
+      <index name="username_search" columns="username"/>
+    </indexes>
+    <unique-constraints>
+      <unique-constraint name="username" columns="username"/>
+      <unique-constraint name="employee_number" columns="employee_number"/>
+    </unique-constraints>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="username" type="string" column="username" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="password" type="string" column="password" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="forcePasswordChange" type="integer" column="force_password_change" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="language" type="string" column="language" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="commissionPercent" type="decimal" column="commission_percent" precision="23" scale="10" nullable="true">
+      <options>
+        <option name="default">0.0000000000</option>
+      </options>
+    </field>
+    <field name="commissionPercentType" type="string" column="commission_percent_type" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+        <option name="default"/>
+      </options>
+    </field>
+    <field name="hourlyPayRate" type="decimal" column="hourly_pay_rate" precision="23" scale="10" nullable="false">
+      <options>
+        <option name="default">0.0000000000</option>
+      </options>
+    </field>
+    <field name="inactive" type="integer" column="inactive" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="reasonInactive" type="text" column="reason_inactive" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="hireDate" type="date" column="hire_date" nullable="true"/>
+    <field name="employeeNumber" type="string" column="employee_number" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="birthday" type="date" column="birthday" nullable="true"/>
+    <field name="terminationDate" type="date" column="termination_date" nullable="true"/>
+    <field name="deleted" type="integer" column="deleted" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <many-to-one field="person" target-entity="PhpposPeople" fetch="LAZY">
+      <join-columns>
+        <join-column name="person_id" referenced-column-name="person_id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-many field="module" target-entity="PhpposModules" mapped-by="person" fetch="LAZY"/>
+    <many-to-many field="location" target-entity="PhpposLocations" inversed-by="employee" fetch="LAZY">
+      <join-table name="phppos_employees_locations">
+        <join-columns>
+          <join-column name="employee_id" referenced-column-name="person_id"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="location_id" referenced-column-name="location_id"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+  </entity>
+</doctrine-mapping>

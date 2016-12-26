@@ -1,0 +1,40 @@
+<?php
+
+namespace principalBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * PhpposAppFiles
+ *
+ * @ORM\Table(name="phppos_app_files")
+ * @ORM\Entity
+ */
+class PhpposAppFiles
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="file_name", type="string", length=255, nullable=false)
+     */
+    private $fileName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="file_data", type="blob", nullable=false)
+     */
+    private $fileData;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="file_id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $fileId;
+
+
+}
+

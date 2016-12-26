@@ -1,0 +1,76 @@
+<?php
+
+namespace principalBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * PhpposModules
+ *
+ * @ORM\Table(name="phppos_modules", uniqueConstraints={@ORM\UniqueConstraint(name="desc_lang_key", columns={"desc_lang_key"}), @ORM\UniqueConstraint(name="name_lang_key", columns={"name_lang_key"})})
+ * @ORM\Entity
+ */
+class PhpposModules
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name_lang_key", type="string", length=255, nullable=false)
+     */
+    private $nameLangKey;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="desc_lang_key", type="string", length=255, nullable=false)
+     */
+    private $descLangKey;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="sort", type="integer", nullable=false)
+     */
+    private $sort;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="icon", type="string", length=255, nullable=false)
+     */
+    private $icon;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="module_id", type="string", length=100)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $moduleId;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="principalBundle\Entity\PhpposEmployees", inversedBy="module")
+     * @ORM\JoinTable(name="phppos_permissions",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="module_id", referencedColumnName="module_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="person_id", referencedColumnName="person_id")
+     *   }
+     * )
+     */
+    private $person;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->person = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}
+

@@ -1,0 +1,73 @@
+{# --- SE CREA UN SOLO NAVBAR PARA EVITAR TENER VARIOS EN DIFERENTES PAGES --- #}
+{% block navbar %}
+    <header> 
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#"></a>
+                </div>               
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-book"></span> Libros<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                {% if categorias %}
+                                    {% for categoria in categorias %}
+                                    <li><a href="#">{{ categoria.name }}</a></li>
+                                    {% endfor%}
+                                {% else %}
+                                    <li><a href="#">No hay categorias registradas, disculpe los inconvenientes</a></li>
+                                {% endif %}
+                               
+                            </ul>
+                        </li>
+                    <form class="navbar-form navbar-left" role="search">
+                        <div class="form-group">
+                            <input class="form-control" placeholder="Buscar producto" type="text">
+                        </div>
+                        <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span> Buscar</button>
+                    </form> 
+                    <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"> Session<span class="caret"></span></a>
+                            {% if sessionActiva==0 %}
+                                    <ul class="dropdown-menu">                                
+                                        <form class="navbar-form navbar-left" role="search"  class="form-signin" method="post" action="{{ path('checkSession') }}">
+                                            <div class="form-group">
+                                                <label>Usuario</label>
+                                                <input name="Usuario" class="form-control" placeholder="Usuario" type="text">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Clave</label>
+                                                <input name="Clave" type="password" class="form-control" placeholder="Clave" type="text">
+                                            </div>
+                                            <hr>
+                                            <div class="form-group">
+                                                <button name="iniciarsession" type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-log-in"></span> Aceptar</button>
+                                            </div>
+                                            <hr>
+                                            <a id="registrar" class="btn btn-link" href="{{path('modal')}}" data-title="Alfalibros nuevo cliente" data-toggle="lightbox" >Registrate</a> 
+                                        </form>
+                                    </ul>
+                            {% else %} 
+                                <ul class="dropdown-menu">                                 
+                                    <li><a href="#" data-toggle="lightbox" data-title="Cambio de clave del sistema"><span class="glyphicon glyphicon-user"></span> Cambiar clave</a></li>
+                                    <li><a href="{{path('logout')}}"><span class="glyphicon glyphicon-off"></span> Salir</a></li>
+                                </ul>
+                                
+                            {% endif %}
+                    </li>                   
+                                           
+                    
+                </div>
+            </div>
+        </nav>
+    </header>
+   
+{% endblock %}    

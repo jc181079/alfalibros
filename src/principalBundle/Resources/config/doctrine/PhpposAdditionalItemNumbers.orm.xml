@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="principalBundle\Entity\PhpposAdditionalItemNumbers" table="phppos_additional_item_numbers">
+    <indexes>
+      <index name="item_number_search" columns="item_number"/>
+      <index name="IDX_EFECC45B126F525E" columns="item_id"/>
+    </indexes>
+    <unique-constraints>
+      <unique-constraint name="item_number" columns="item_number"/>
+    </unique-constraints>
+    <id name="itemNumber" type="string" column="item_number" length="255"/>
+    <id name="item" association-key="true"/>
+    <one-to-one field="item" target-entity="PhpposItems" fetch="LAZY">
+      <join-columns>
+        <join-column name="item_id" referenced-column-name="item_id"/>
+      </join-columns>
+    </one-to-one>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="principalBundle\Entity\PhpposPeople" table="phppos_people">
+    <indexes>
+      <index name="phppos_people_ibfk_1" columns="image_id"/>
+      <index name="full_search" columns="first_name,last_name,email,phone_number"/>
+      <index name="first_name_search" columns="first_name"/>
+      <index name="last_name_search" columns="last_name"/>
+      <index name="full_name_search" columns="first_name,last_name"/>
+      <index name="email_search" columns="email"/>
+      <index name="phone_number_search" columns="phone_number"/>
+    </indexes>
+    <id name="personId" type="integer" column="person_id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="firstName" type="string" column="first_name" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="lastName" type="string" column="last_name" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="phoneNumber" type="string" column="phone_number" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="email" type="string" column="email" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="address1" type="string" column="address_1" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="address2" type="string" column="address_2" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="city" type="string" column="city" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="state" type="string" column="state" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="zip" type="string" column="zip" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="country" type="string" column="country" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="comments" type="text" column="comments" length="65535" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="image" target-entity="PhpposAppFiles" fetch="LAZY">
+      <join-columns>
+        <join-column name="image_id" referenced-column-name="file_id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

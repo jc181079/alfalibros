@@ -1,0 +1,144 @@
+<?php
+
+namespace principalBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * PhpposCustomers
+ *
+ * @ORM\Table(name="phppos_customers", uniqueConstraints={@ORM\UniqueConstraint(name="account_number", columns={"account_number"})}, indexes={@ORM\Index(name="person_id", columns={"person_id"}), @ORM\Index(name="deleted", columns={"deleted"}), @ORM\Index(name="cc_token", columns={"cc_token"}), @ORM\Index(name="phppos_customers_ibfk_2", columns={"tier_id"}), @ORM\Index(name="full_search", columns={"account_number", "company_name", "tax_certificate"}), @ORM\Index(name="account_number_search", columns={"account_number"}), @ORM\Index(name="company_name_search", columns={"company_name"}), @ORM\Index(name="tax_certificate_search", columns={"tax_certificate"})})
+ * @ORM\Entity
+ */
+class PhpposCustomers
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="account_number", type="string", length=255, nullable=true)
+     */
+    private $accountNumber;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="override_default_tax", type="integer", nullable=false)
+     */
+    private $overrideDefaultTax = '0';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="company_name", type="string", length=255, nullable=false)
+     */
+    private $companyName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="balance", type="decimal", precision=23, scale=10, nullable=false)
+     */
+    private $balance = '0.0000000000';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="credit_limit", type="decimal", precision=23, scale=10, nullable=true)
+     */
+    private $creditLimit;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="points", type="decimal", precision=23, scale=10, nullable=false)
+     */
+    private $points = '0.0000000000';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="current_spend_for_points", type="decimal", precision=23, scale=10, nullable=false)
+     */
+    private $currentSpendForPoints = '0.0000000000';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="current_sales_for_discount", type="integer", nullable=false)
+     */
+    private $currentSalesForDiscount = '0';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="taxable", type="integer", nullable=false)
+     */
+    private $taxable = '1';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="tax_certificate", type="string", length=255, nullable=false)
+     */
+    private $taxCertificate = '';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="cc_token", type="string", length=255, nullable=true)
+     */
+    private $ccToken;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="cc_preview", type="string", length=255, nullable=true)
+     */
+    private $ccPreview;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="card_issuer", type="string", length=255, nullable=true)
+     */
+    private $cardIssuer = '';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="deleted", type="integer", nullable=false)
+     */
+    private $deleted = '0';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \principalBundle\Entity\PhpposPriceTiers
+     *
+     * @ORM\ManyToOne(targetEntity="principalBundle\Entity\PhpposPriceTiers")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="tier_id", referencedColumnName="id")
+     * })
+     */
+    private $tier;
+
+    /**
+     * @var \principalBundle\Entity\PhpposPeople
+     *
+     * @ORM\ManyToOne(targetEntity="principalBundle\Entity\PhpposPeople")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="person_id", referencedColumnName="person_id")
+     * })
+     */
+    private $person;
+
+
+}
+

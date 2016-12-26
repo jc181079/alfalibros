@@ -1,0 +1,75 @@
+<?php
+
+namespace principalBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * PhpposReceivingsItemsTaxes
+ *
+ * @ORM\Table(name="phppos_receivings_items_taxes", indexes={@ORM\Index(name="item_id", columns={"item_id"}), @ORM\Index(name="IDX_DAA2BC43C8178241", columns={"receiving_id"})})
+ * @ORM\Entity
+ */
+class PhpposReceivingsItemsTaxes
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="cumulative", type="integer", nullable=false)
+     */
+    private $cumulative = '0';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="line", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $line;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="percent", type="decimal")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $percent;
+
+    /**
+     * @var \principalBundle\Entity\PhpposItems
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\OneToOne(targetEntity="principalBundle\Entity\PhpposItems")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="item_id", referencedColumnName="item_id")
+     * })
+     */
+    private $item;
+
+    /**
+     * @var \principalBundle\Entity\PhpposReceivings
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\OneToOne(targetEntity="principalBundle\Entity\PhpposReceivings")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="receiving_id", referencedColumnName="receiving_id")
+     * })
+     */
+    private $receiving;
+
+
+}
+

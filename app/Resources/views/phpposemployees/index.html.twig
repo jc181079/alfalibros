@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Phpposemployees list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Forcepasswordchange</th>
+                <th>Language</th>
+                <th>Commissionpercent</th>
+                <th>Commissionpercenttype</th>
+                <th>Hourlypayrate</th>
+                <th>Inactive</th>
+                <th>Reasoninactive</th>
+                <th>Hiredate</th>
+                <th>Employeenumber</th>
+                <th>Birthday</th>
+                <th>Terminationdate</th>
+                <th>Deleted</th>
+                <th>Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for phpposEmployee in phpposEmployees %}
+            <tr>
+                <td><a href="{{ path('phpposemployees_show', { 'id': phpposEmployee.id }) }}">{{ phpposEmployee.username }}</a></td>
+                <td>{{ phpposEmployee.password }}</td>
+                <td>{{ phpposEmployee.forcePasswordChange }}</td>
+                <td>{{ phpposEmployee.language }}</td>
+                <td>{{ phpposEmployee.commissionPercent }}</td>
+                <td>{{ phpposEmployee.commissionPercentType }}</td>
+                <td>{{ phpposEmployee.hourlyPayRate }}</td>
+                <td>{{ phpposEmployee.inactive }}</td>
+                <td>{{ phpposEmployee.reasonInactive }}</td>
+                <td>{% if phpposEmployee.hireDate %}{{ phpposEmployee.hireDate|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ phpposEmployee.employeeNumber }}</td>
+                <td>{% if phpposEmployee.birthday %}{{ phpposEmployee.birthday|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if phpposEmployee.terminationDate %}{{ phpposEmployee.terminationDate|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ phpposEmployee.deleted }}</td>
+                <td>{{ phpposEmployee.id }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('phpposemployees_show', { 'id': phpposEmployee.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('phpposemployees_edit', { 'id': phpposEmployee.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('phpposemployees_new') }}">Create a new phpposEmployee</a>
+        </li>
+    </ul>
+{% endblock %}

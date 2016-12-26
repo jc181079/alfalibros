@@ -1,0 +1,53 @@
+<?php
+
+namespace principalBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * PhpposMessageReceiver
+ *
+ * @ORM\Table(name="phppos_message_receiver", indexes={@ORM\Index(name="phppos_message_receiver_ibfk_2", columns={"receiver_id"}), @ORM\Index(name="phppos_message_receiver_key_1", columns={"message_id", "receiver_id"}), @ORM\Index(name="IDX_372D880F537A1329", columns={"message_id"})})
+ * @ORM\Entity
+ */
+class PhpposMessageReceiver
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="message_read", type="integer", nullable=false)
+     */
+    private $messageRead = '0';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \principalBundle\Entity\PhpposEmployees
+     *
+     * @ORM\ManyToOne(targetEntity="principalBundle\Entity\PhpposEmployees")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="receiver_id", referencedColumnName="person_id")
+     * })
+     */
+    private $receiver;
+
+    /**
+     * @var \principalBundle\Entity\PhpposMessages
+     *
+     * @ORM\ManyToOne(targetEntity="principalBundle\Entity\PhpposMessages")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="message_id", referencedColumnName="id")
+     * })
+     */
+    private $message;
+
+
+}
+

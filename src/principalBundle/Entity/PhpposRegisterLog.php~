@@ -1,0 +1,119 @@
+<?php
+
+namespace principalBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * PhpposRegisterLog
+ *
+ * @ORM\Table(name="phppos_register_log", indexes={@ORM\Index(name="phppos_register_log_ibfk_1", columns={"employee_id_open"}), @ORM\Index(name="phppos_register_log_ibfk_2", columns={"register_id"}), @ORM\Index(name="phppos_register_log_ibfk_3", columns={"employee_id_close"})})
+ * @ORM\Entity
+ */
+class PhpposRegisterLog
+{
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="shift_start", type="datetime", nullable=false)
+     */
+    private $shiftStart = '0000-00-00 00:00:00';
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="shift_end", type="datetime", nullable=false)
+     */
+    private $shiftEnd = '0000-00-00 00:00:00';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="open_amount", type="decimal", precision=23, scale=10, nullable=false)
+     */
+    private $openAmount;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="close_amount", type="decimal", precision=23, scale=10, nullable=false)
+     */
+    private $closeAmount;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="cash_sales_amount", type="decimal", precision=23, scale=10, nullable=false)
+     */
+    private $cashSalesAmount;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="total_cash_additions", type="decimal", precision=23, scale=10, nullable=false)
+     */
+    private $totalCashAdditions = '0.0000000000';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="total_cash_subtractions", type="decimal", precision=23, scale=10, nullable=false)
+     */
+    private $totalCashSubtractions = '0.0000000000';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="notes", type="string", length=255, nullable=true)
+     */
+    private $notes;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="deleted", type="integer", nullable=false)
+     */
+    private $deleted = '0';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="register_log_id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $registerLogId;
+
+    /**
+     * @var \principalBundle\Entity\PhpposEmployees
+     *
+     * @ORM\ManyToOne(targetEntity="principalBundle\Entity\PhpposEmployees")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="employee_id_close", referencedColumnName="person_id")
+     * })
+     */
+    private $employeeClose;
+
+    /**
+     * @var \principalBundle\Entity\PhpposRegisters
+     *
+     * @ORM\ManyToOne(targetEntity="principalBundle\Entity\PhpposRegisters")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="register_id", referencedColumnName="register_id")
+     * })
+     */
+    private $register;
+
+    /**
+     * @var \principalBundle\Entity\PhpposEmployees
+     *
+     * @ORM\ManyToOne(targetEntity="principalBundle\Entity\PhpposEmployees")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="employee_id_open", referencedColumnName="person_id")
+     * })
+     */
+    private $employeeOpen;
+
+
+}
+

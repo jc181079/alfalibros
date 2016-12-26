@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="principalBundle\Entity\PhpposStoreAccounts" table="phppos_store_accounts">
+    <indexes>
+      <index name="phppos_store_accounts_ibfk_1" columns="sale_id"/>
+      <index name="phppos_store_accounts_ibfk_2" columns="customer_id"/>
+    </indexes>
+    <id name="sno" type="integer" column="sno">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="transactionAmount" type="decimal" column="transaction_amount" precision="23" scale="10" nullable="false">
+      <options>
+        <option name="default">0.0000000000</option>
+      </options>
+    </field>
+    <field name="date" type="datetime" column="date" nullable="false">
+      <options>
+        <option name="default">CURRENT_TIMESTAMP</option>
+      </options>
+    </field>
+    <field name="balance" type="decimal" column="balance" precision="23" scale="10" nullable="false">
+      <options>
+        <option name="default">0.0000000000</option>
+      </options>
+    </field>
+    <field name="comment" type="text" column="comment" length="65535" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="customer" target-entity="PhpposCustomers" fetch="LAZY">
+      <join-columns>
+        <join-column name="customer_id" referenced-column-name="person_id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="sale" target-entity="PhpposSales" fetch="LAZY">
+      <join-columns>
+        <join-column name="sale_id" referenced-column-name="sale_id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

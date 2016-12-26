@@ -1,0 +1,106 @@
+<?php
+
+namespace principalBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * PhpposReceivingsItems
+ *
+ * @ORM\Table(name="phppos_receivings_items", indexes={@ORM\Index(name="item_id", columns={"item_id"}), @ORM\Index(name="IDX_E26259B3C8178241", columns={"receiving_id"})})
+ * @ORM\Entity
+ */
+class PhpposReceivingsItems
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string", length=255, nullable=true)
+     */
+    private $description;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="serialnumber", type="string", length=255, nullable=true)
+     */
+    private $serialnumber;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="quantity_purchased", type="decimal", precision=23, scale=10, nullable=false)
+     */
+    private $quantityPurchased = '0.0000000000';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="quantity_received", type="decimal", precision=23, scale=10, nullable=false)
+     */
+    private $quantityReceived = '0.0000000000';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="item_cost_price", type="decimal", precision=23, scale=10, nullable=false)
+     */
+    private $itemCostPrice;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="item_unit_price", type="decimal", precision=23, scale=10, nullable=false)
+     */
+    private $itemUnitPrice;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="discount_percent", type="decimal", precision=15, scale=3, nullable=false)
+     */
+    private $discountPercent = '0.000';
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="expire_date", type="date", nullable=true)
+     */
+    private $expireDate;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="line", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $line;
+
+    /**
+     * @var \principalBundle\Entity\PhpposReceivings
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\OneToOne(targetEntity="principalBundle\Entity\PhpposReceivings")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="receiving_id", referencedColumnName="receiving_id")
+     * })
+     */
+    private $receiving;
+
+    /**
+     * @var \principalBundle\Entity\PhpposItems
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\OneToOne(targetEntity="principalBundle\Entity\PhpposItems")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="item_id", referencedColumnName="item_id")
+     * })
+     */
+    private $item;
+
+
+}
+

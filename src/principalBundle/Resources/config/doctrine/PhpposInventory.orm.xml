@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="principalBundle\Entity\PhpposInventory" table="phppos_inventory">
+    <indexes>
+      <index name="phppos_inventory_ibfk_1" columns="trans_items"/>
+      <index name="phppos_inventory_ibfk_2" columns="trans_user"/>
+      <index name="location_id" columns="location_id"/>
+    </indexes>
+    <id name="transId" type="integer" column="trans_id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="transDate" type="datetime" column="trans_date" nullable="false">
+      <options>
+        <option name="default">CURRENT_TIMESTAMP</option>
+      </options>
+    </field>
+    <field name="transComment" type="text" column="trans_comment" length="65535" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="transInventory" type="decimal" column="trans_inventory" precision="23" scale="10" nullable="false">
+      <options>
+        <option name="default">0.0000000000</option>
+      </options>
+    </field>
+    <many-to-one field="location" target-entity="PhpposLocations" fetch="LAZY">
+      <join-columns>
+        <join-column name="location_id" referenced-column-name="location_id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="transUser" target-entity="PhpposEmployees" fetch="LAZY">
+      <join-columns>
+        <join-column name="trans_user" referenced-column-name="person_id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="transItems" target-entity="PhpposItems" fetch="LAZY">
+      <join-columns>
+        <join-column name="trans_items" referenced-column-name="item_id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

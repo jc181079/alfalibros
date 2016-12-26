@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="principalBundle\Entity\PhpposSalesItemKits" table="phppos_sales_item_kits">
+    <indexes>
+      <index name="item_kit_id" columns="item_kit_id"/>
+      <index name="IDX_F9665BF54A7E4868" columns="sale_id"/>
+    </indexes>
+    <id name="line" type="integer" column="line"/>
+    <id name="itemKit" association-key="true"/>
+    <id name="sale" association-key="true"/>
+    <field name="description" type="string" column="description" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="quantityPurchased" type="decimal" column="quantity_purchased" precision="23" scale="10" nullable="false">
+      <options>
+        <option name="default">0.0000000000</option>
+      </options>
+    </field>
+    <field name="itemKitCostPrice" type="decimal" column="item_kit_cost_price" precision="23" scale="10" nullable="false"/>
+    <field name="itemKitUnitPrice" type="decimal" column="item_kit_unit_price" precision="23" scale="10" nullable="false"/>
+    <field name="discountPercent" type="decimal" column="discount_percent" precision="15" scale="3" nullable="false">
+      <options>
+        <option name="default">0.000</option>
+      </options>
+    </field>
+    <field name="commission" type="decimal" column="commission" precision="23" scale="10" nullable="false">
+      <options>
+        <option name="default">0.0000000000</option>
+      </options>
+    </field>
+    <one-to-one field="sale" target-entity="PhpposSales" fetch="LAZY">
+      <join-columns>
+        <join-column name="sale_id" referenced-column-name="sale_id"/>
+      </join-columns>
+    </one-to-one>
+    <one-to-one field="itemKit" target-entity="PhpposItemKits" fetch="LAZY">
+      <join-columns>
+        <join-column name="item_kit_id" referenced-column-name="item_kit_id"/>
+      </join-columns>
+    </one-to-one>
+  </entity>
+</doctrine-mapping>

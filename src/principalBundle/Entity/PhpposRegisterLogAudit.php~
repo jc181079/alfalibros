@@ -1,0 +1,67 @@
+<?php
+
+namespace principalBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * PhpposRegisterLogAudit
+ *
+ * @ORM\Table(name="phppos_register_log_audit", indexes={@ORM\Index(name="register_log_audit_ibfk_1", columns={"register_log_id"}), @ORM\Index(name="register_log_audit_ibfk_2", columns={"employee_id"})})
+ * @ORM\Entity
+ */
+class PhpposRegisterLogAudit
+{
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="datetime", nullable=false)
+     */
+    private $date = 'CURRENT_TIMESTAMP';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="amount", type="decimal", precision=23, scale=10, nullable=false)
+     */
+    private $amount = '0.0000000000';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="note", type="text", length=65535, nullable=false)
+     */
+    private $note;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \principalBundle\Entity\PhpposEmployees
+     *
+     * @ORM\ManyToOne(targetEntity="principalBundle\Entity\PhpposEmployees")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="employee_id", referencedColumnName="person_id")
+     * })
+     */
+    private $employee;
+
+    /**
+     * @var \principalBundle\Entity\PhpposRegisterLog
+     *
+     * @ORM\ManyToOne(targetEntity="principalBundle\Entity\PhpposRegisterLog")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="register_log_id", referencedColumnName="register_log_id")
+     * })
+     */
+    private $registerLog;
+
+
+}
+

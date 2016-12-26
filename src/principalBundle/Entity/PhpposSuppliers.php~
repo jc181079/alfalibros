@@ -1,0 +1,64 @@
+<?php
+
+namespace principalBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * PhpposSuppliers
+ *
+ * @ORM\Table(name="phppos_suppliers", uniqueConstraints={@ORM\UniqueConstraint(name="account_number", columns={"account_number"})}, indexes={@ORM\Index(name="person_id", columns={"person_id"}), @ORM\Index(name="deleted", columns={"deleted"}), @ORM\Index(name="full_search", columns={"account_number", "company_name"}), @ORM\Index(name="company_name_search", columns={"company_name"}), @ORM\Index(name="account_number_search", columns={"account_number"})})
+ * @ORM\Entity
+ */
+class PhpposSuppliers
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="company_name", type="string", length=255, nullable=false)
+     */
+    private $companyName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="account_number", type="string", length=255, nullable=true)
+     */
+    private $accountNumber;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="override_default_tax", type="integer", nullable=false)
+     */
+    private $overrideDefaultTax = '0';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="deleted", type="integer", nullable=false)
+     */
+    private $deleted = '0';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \principalBundle\Entity\PhpposPeople
+     *
+     * @ORM\ManyToOne(targetEntity="principalBundle\Entity\PhpposPeople")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="person_id", referencedColumnName="person_id")
+     * })
+     */
+    private $person;
+
+
+}
+

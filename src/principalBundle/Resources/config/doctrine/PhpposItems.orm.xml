@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="principalBundle\Entity\PhpposItems" table="phppos_items">
+    <indexes>
+      <index name="phppos_items_ibfk_1" columns="supplier_id"/>
+      <index name="deleted" columns="deleted"/>
+      <index name="phppos_items_ibfk_2" columns="image_id"/>
+      <index name="phppos_items_ibfk_3" columns="category_id"/>
+      <index name="full_search" columns="name,item_number,product_id,description"/>
+      <index name="name_search" columns="name"/>
+      <index name="item_number_search" columns="item_number"/>
+      <index name="product_id_search" columns="product_id"/>
+      <index name="description_search" columns="description"/>
+      <index name="size_search" columns="size"/>
+    </indexes>
+    <unique-constraints>
+      <unique-constraint name="item_number" columns="item_number"/>
+      <unique-constraint name="product_id" columns="product_id"/>
+    </unique-constraints>
+    <id name="itemId" type="integer" column="item_id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="name" type="string" column="name" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="itemNumber" type="string" column="item_number" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="productId" type="string" column="product_id" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="description" type="string" column="description" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="size" type="string" column="size" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="default"/>
+      </options>
+    </field>
+    <field name="taxIncluded" type="integer" column="tax_included" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="costPrice" type="decimal" column="cost_price" precision="23" scale="10" nullable="false"/>
+    <field name="unitPrice" type="decimal" column="unit_price" precision="23" scale="10" nullable="false"/>
+    <field name="promoPrice" type="decimal" column="promo_price" precision="23" scale="10" nullable="true"/>
+    <field name="startDate" type="date" column="start_date" nullable="true"/>
+    <field name="endDate" type="date" column="end_date" nullable="true"/>
+    <field name="reorderLevel" type="decimal" column="reorder_level" precision="23" scale="10" nullable="true"/>
+    <field name="expireDays" type="integer" column="expire_days" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="allowAltDescription" type="boolean" column="allow_alt_description" nullable="false"/>
+    <field name="isSerialized" type="boolean" column="is_serialized" nullable="false"/>
+    <field name="overrideDefaultTax" type="integer" column="override_default_tax" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="isService" type="integer" column="is_service" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="commissionPercent" type="decimal" column="commission_percent" precision="23" scale="10" nullable="true">
+      <options>
+        <option name="default">0.0000000000</option>
+      </options>
+    </field>
+    <field name="commissionPercentType" type="string" column="commission_percent_type" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+        <option name="default"/>
+      </options>
+    </field>
+    <field name="commissionFixed" type="decimal" column="commission_fixed" precision="23" scale="10" nullable="true">
+      <options>
+        <option name="default">0.0000000000</option>
+      </options>
+    </field>
+    <field name="changeCostPrice" type="integer" column="change_cost_price" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="deleted" type="integer" column="deleted" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <many-to-one field="supplier" target-entity="PhpposSuppliers" fetch="LAZY">
+      <join-columns>
+        <join-column name="supplier_id" referenced-column-name="person_id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="category" target-entity="PhpposCategories" fetch="LAZY">
+      <join-columns>
+        <join-column name="category_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="image" target-entity="PhpposAppFiles" fetch="LAZY">
+      <join-columns>
+        <join-column name="image_id" referenced-column-name="file_id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-many field="location" target-entity="PhpposLocations" mapped-by="item" fetch="LAZY"/>
+    <many-to-many field="tag" target-entity="PhpposTags" inversed-by="item" fetch="LAZY">
+      <join-table name="phppos_items_tags">
+        <join-columns>
+          <join-column name="item_id" referenced-column-name="item_id"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="tag_id" referenced-column-name="id"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+    <many-to-many field="tier" target-entity="PhpposPriceTiers" mapped-by="item" fetch="LAZY"/>
+  </entity>
+</doctrine-mapping>

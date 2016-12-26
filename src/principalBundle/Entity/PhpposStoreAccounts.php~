@@ -1,0 +1,74 @@
+<?php
+
+namespace principalBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * PhpposStoreAccounts
+ *
+ * @ORM\Table(name="phppos_store_accounts", indexes={@ORM\Index(name="phppos_store_accounts_ibfk_1", columns={"sale_id"}), @ORM\Index(name="phppos_store_accounts_ibfk_2", columns={"customer_id"})})
+ * @ORM\Entity
+ */
+class PhpposStoreAccounts
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="transaction_amount", type="decimal", precision=23, scale=10, nullable=false)
+     */
+    private $transactionAmount = '0.0000000000';
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="datetime", nullable=false)
+     */
+    private $date = 'CURRENT_TIMESTAMP';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="balance", type="decimal", precision=23, scale=10, nullable=false)
+     */
+    private $balance = '0.0000000000';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="comment", type="text", length=65535, nullable=false)
+     */
+    private $comment;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="sno", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $sno;
+
+    /**
+     * @var \principalBundle\Entity\PhpposCustomers
+     *
+     * @ORM\ManyToOne(targetEntity="principalBundle\Entity\PhpposCustomers")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="customer_id", referencedColumnName="person_id")
+     * })
+     */
+    private $customer;
+
+    /**
+     * @var \principalBundle\Entity\PhpposSales
+     *
+     * @ORM\ManyToOne(targetEntity="principalBundle\Entity\PhpposSales")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="sale_id", referencedColumnName="sale_id")
+     * })
+     */
+    private $sale;
+
+
+}
+

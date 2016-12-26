@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="principalBundle\Entity\PhpposModulesActions" table="phppos_modules_actions">
+    <indexes>
+      <index name="phppos_modules_actions_ibfk_1" columns="module_id"/>
+    </indexes>
+    <id name="actionId" type="string" column="action_id" length="100"/>
+    <id name="module" association-key="true"/>
+    <field name="actionNameKey" type="string" column="action_name_key" length="100" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="sort" type="integer" column="sort" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <one-to-one field="module" target-entity="PhpposModules" fetch="LAZY">
+      <join-columns>
+        <join-column name="module_id" referenced-column-name="module_id"/>
+      </join-columns>
+    </one-to-one>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,78 @@
+<?php
+
+namespace principalBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * PhpposPriceTiers
+ *
+ * @ORM\Table(name="phppos_price_tiers")
+ * @ORM\Entity
+ */
+class PhpposPriceTiers
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="order", type="integer", nullable=false)
+     */
+    private $order = '0';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255, nullable=false)
+     */
+    private $name;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="principalBundle\Entity\PhpposItems", inversedBy="tier")
+     * @ORM\JoinTable(name="phppos_items_tier_prices",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="tier_id", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="item_id", referencedColumnName="item_id")
+     *   }
+     * )
+     */
+    private $item;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="principalBundle\Entity\PhpposItemKits", inversedBy="tier")
+     * @ORM\JoinTable(name="phppos_item_kits_tier_prices",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="tier_id", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="item_kit_id", referencedColumnName="item_kit_id")
+     *   }
+     * )
+     */
+    private $itemKit;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->item = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->itemKit = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}
+

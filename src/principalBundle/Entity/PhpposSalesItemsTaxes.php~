@@ -1,0 +1,75 @@
+<?php
+
+namespace principalBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * PhpposSalesItemsTaxes
+ *
+ * @ORM\Table(name="phppos_sales_items_taxes", indexes={@ORM\Index(name="item_id", columns={"item_id"}), @ORM\Index(name="IDX_6139C4554A7E4868", columns={"sale_id"})})
+ * @ORM\Entity
+ */
+class PhpposSalesItemsTaxes
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="cumulative", type="integer", nullable=false)
+     */
+    private $cumulative = '0';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="line", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $line;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="percent", type="decimal")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $percent;
+
+    /**
+     * @var \principalBundle\Entity\PhpposItems
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\OneToOne(targetEntity="principalBundle\Entity\PhpposItems")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="item_id", referencedColumnName="item_id")
+     * })
+     */
+    private $item;
+
+    /**
+     * @var \principalBundle\Entity\PhpposSalesItems
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\OneToOne(targetEntity="principalBundle\Entity\PhpposSalesItems")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="sale_id", referencedColumnName="sale_id")
+     * })
+     */
+    private $sale;
+
+
+}
+

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="principalBundle\Entity\PhpposGiftcards" table="phppos_giftcards">
+    <indexes>
+      <index name="deleted" columns="deleted"/>
+      <index name="phppos_giftcards_ibfk_1" columns="customer_id"/>
+      <index name="giftcard_number_search" columns="description,giftcard_number"/>
+    </indexes>
+    <unique-constraints>
+      <unique-constraint name="giftcard_number" columns="giftcard_number"/>
+    </unique-constraints>
+    <id name="giftcardId" type="integer" column="giftcard_id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="giftcardNumber" type="string" column="giftcard_number" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="description" type="text" column="description" length="65535" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="value" type="decimal" column="value" precision="23" scale="10" nullable="false"/>
+    <field name="inactive" type="integer" column="inactive" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="deleted" type="integer" column="deleted" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <many-to-one field="customer" target-entity="PhpposCustomers" fetch="LAZY">
+      <join-columns>
+        <join-column name="customer_id" referenced-column-name="person_id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

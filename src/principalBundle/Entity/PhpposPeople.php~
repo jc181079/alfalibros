@@ -1,0 +1,113 @@
+<?php
+
+namespace principalBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * PhpposPeople
+ *
+ * @ORM\Table(name="phppos_people", indexes={@ORM\Index(name="phppos_people_ibfk_1", columns={"image_id"}), @ORM\Index(name="full_search", columns={"first_name", "last_name", "email", "phone_number"}), @ORM\Index(name="first_name_search", columns={"first_name"}), @ORM\Index(name="last_name_search", columns={"last_name"}), @ORM\Index(name="full_name_search", columns={"first_name", "last_name"}), @ORM\Index(name="email_search", columns={"email"}), @ORM\Index(name="phone_number_search", columns={"phone_number"})})
+ * @ORM\Entity
+ */
+class PhpposPeople
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="first_name", type="string", length=255, nullable=false)
+     */
+    private $firstName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="last_name", type="string", length=255, nullable=false)
+     */
+    private $lastName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="phone_number", type="string", length=255, nullable=false)
+     */
+    private $phoneNumber;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=255, nullable=false)
+     */
+    private $email;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="address_1", type="string", length=255, nullable=false)
+     */
+    private $address1;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="address_2", type="string", length=255, nullable=false)
+     */
+    private $address2;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="city", type="string", length=255, nullable=false)
+     */
+    private $city;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="state", type="string", length=255, nullable=false)
+     */
+    private $state;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="zip", type="string", length=255, nullable=false)
+     */
+    private $zip;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="country", type="string", length=255, nullable=false)
+     */
+    private $country;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="comments", type="text", length=65535, nullable=false)
+     */
+    private $comments;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="person_id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $personId;
+
+    /**
+     * @var \principalBundle\Entity\PhpposAppFiles
+     *
+     * @ORM\ManyToOne(targetEntity="principalBundle\Entity\PhpposAppFiles")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="image_id", referencedColumnName="file_id")
+     * })
+     */
+    private $image;
+
+
+}
+

@@ -1,0 +1,122 @@
+<?php
+
+namespace principalBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * PhpposExpenses
+ *
+ * @ORM\Table(name="phppos_expenses", indexes={@ORM\Index(name="location_id", columns={"location_id"}), @ORM\Index(name="employee_id", columns={"employee_id"}), @ORM\Index(name="approved_employee_id", columns={"approved_employee_id"}), @ORM\Index(name="category_id", columns={"category_id"}), @ORM\Index(name="deleted", columns={"deleted"}), @ORM\Index(name="full_search", columns={"expense_type", "expense_description", "expense_reason", "expense_note"}), @ORM\Index(name="expense_type_search", columns={"expense_type"}), @ORM\Index(name="expense_description_search", columns={"expense_description"}), @ORM\Index(name="expense_reason_search", columns={"expense_reason"}), @ORM\Index(name="expense_note_search", columns={"expense_note"})})
+ * @ORM\Entity
+ */
+class PhpposExpenses
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="expense_type", type="string", length=255, nullable=false)
+     */
+    private $expenseType;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="expense_description", type="text", length=65535, nullable=true)
+     */
+    private $expenseDescription;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="expense_reason", type="string", length=255, nullable=true)
+     */
+    private $expenseReason;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="expense_date", type="datetime", nullable=false)
+     */
+    private $expenseDate = 'CURRENT_TIMESTAMP';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="expense_amount", type="decimal", precision=23, scale=10, nullable=false)
+     */
+    private $expenseAmount;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="expense_tax", type="decimal", precision=23, scale=10, nullable=false)
+     */
+    private $expenseTax;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="expense_note", type="string", length=255, nullable=true)
+     */
+    private $expenseNote;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="deleted", type="integer", nullable=false)
+     */
+    private $deleted = '0';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \principalBundle\Entity\PhpposEmployees
+     *
+     * @ORM\ManyToOne(targetEntity="principalBundle\Entity\PhpposEmployees")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="approved_employee_id", referencedColumnName="person_id")
+     * })
+     */
+    private $approvedEmployee;
+
+    /**
+     * @var \principalBundle\Entity\PhpposCategories
+     *
+     * @ORM\ManyToOne(targetEntity="principalBundle\Entity\PhpposCategories")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     * })
+     */
+    private $category;
+
+    /**
+     * @var \principalBundle\Entity\PhpposEmployees
+     *
+     * @ORM\ManyToOne(targetEntity="principalBundle\Entity\PhpposEmployees")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="employee_id", referencedColumnName="person_id")
+     * })
+     */
+    private $employee;
+
+    /**
+     * @var \principalBundle\Entity\PhpposLocations
+     *
+     * @ORM\ManyToOne(targetEntity="principalBundle\Entity\PhpposLocations")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="location_id", referencedColumnName="location_id")
+     * })
+     */
+    private $location;
+
+
+}
+

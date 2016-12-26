@@ -1,0 +1,67 @@
+<?php
+
+namespace principalBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * PhpposLocationItemKitsTaxes
+ *
+ * @ORM\Table(name="phppos_location_item_kits_taxes", uniqueConstraints={@ORM\UniqueConstraint(name="unique_tax", columns={"location_id", "item_kit_id", "name", "percent"})}, indexes={@ORM\Index(name="phppos_location_item_kits_taxes_ibfk_2", columns={"item_kit_id"}), @ORM\Index(name="IDX_AC6FA0B464D218E", columns={"location_id"})})
+ * @ORM\Entity
+ */
+class PhpposLocationItemKitsTaxes
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255, nullable=false)
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="percent", type="decimal", precision=16, scale=3, nullable=false)
+     */
+    private $percent;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="cumulative", type="integer", nullable=false)
+     */
+    private $cumulative = '0';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \principalBundle\Entity\PhpposItemKits
+     *
+     * @ORM\ManyToOne(targetEntity="principalBundle\Entity\PhpposItemKits")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="item_kit_id", referencedColumnName="item_kit_id")
+     * })
+     */
+    private $itemKit;
+
+    /**
+     * @var \principalBundle\Entity\PhpposLocations
+     *
+     * @ORM\ManyToOne(targetEntity="principalBundle\Entity\PhpposLocations")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="location_id", referencedColumnName="location_id")
+     * })
+     */
+    private $location;
+
+
+}
+

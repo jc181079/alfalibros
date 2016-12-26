@@ -1,0 +1,69 @@
+{% extends "::base.html.twig" %}
+{% block stylesheets %}
+    {{ parent() }}    
+{% endblock %}
+{% block body %}
+
+    <!-- Modal -->
+                
+                                <form class="form-signin" method="post" action="{{ path('registrate') }}" >
+                                    <div class="form-group">
+                                      <label  class="">Cedula</label>
+                                      <input  id="Cedula" name="Cedula" class="form-control" placeholder="Cedula">
+                                    </div>
+                                    <div class="form-group">
+                                      <label  class="">Nombre</label>
+                                      <input  id="FirstName" name="FirstName" class="form-control" placeholder="Nombre">
+                                    </div>
+                                    <div class="form-group">
+                                        <label  class="">Apellido</label>
+                                        <input  id="LastName" name="LastName" class="form-control" placeholder="Apellido">
+                                    </div>
+                                    <div class="form-group">
+                                        <label  class="">Email</label>
+                                        <input  id="Email" name="Email" class="form-control" placeholder="Email"   >
+                                    </div>
+                                    <div class="form-group">
+                                        <label  class="">Telefono</label>
+                                        <input  id="PhoneNumber" name="PhoneNumber" class="form-control" placeholder="Telefono" >
+                                    </div>
+                                    <div class="form-group">
+                                        <label  class="">Direccion 1</label>
+                                        <input  id="Address1" name="Address1" class="form-control" placeholder="Direccion 2">
+                                    </div>
+                                    <div class="form-group">
+                                        <label  class="">Direccion 2</label>
+                                        <input  id="Address2" name="Address2" class="form-control" placeholder="Direccion 2">
+                                    </div>                                    
+                                    <div class="form-group">
+                                        <label  class="">Ciudad</label>
+                                        <input  id="City" name="City" class="form-control" placeholder="Ciudad"   >
+                                    </div>
+                                    <div class="form-group">
+                                        <label  class="">Estado</label>
+                                        <input  id="State" name="State" class="form-control" placeholder="Estado"   >
+                                    </div>
+                                    <div class="form-group">
+                                        <label  class="">Codigo Postal</label>
+                                        <input  id="Zip" name="Zip" class="form-control" placeholder="Codigo postal"   >
+                                    </div>
+                                    <div class="form-group">
+                                        <label  class="">Pais</label>
+                                        <input  id="Country" name="Country" class="form-control" placeholder="Pais">
+                                    </div>
+                                    <hr>
+                                    <div class="form-group">
+                                      <label  class="">Clave</label>
+                                      <input  id="Clave1" name="Clave1" class="form-control" placeholder="escriba clave" type="password">
+                                    </div>
+                                    <div class="form-group">
+                                      <label  class="">Repite clave</label>
+                                      <input  id="Clave2" name="Clave2" class="form-control" placeholder="Repita clave" type="password">
+                                    </div>                                                         
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                        <button  class="btn btn-success" type="submit"><span class="glyphicon glyphicon-floppy-disk"></span>Guardar</button>
+                                    </div>
+                                </form>
+                            
+{% endblock %}

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="principalBundle\Entity\PhpposRegisters" table="phppos_registers">
+    <indexes>
+      <index name="deleted" columns="deleted"/>
+      <index name="phppos_registers_ibfk_1" columns="location_id"/>
+    </indexes>
+    <id name="registerId" type="integer" column="register_id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="name" type="string" column="name" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="deleted" type="integer" column="deleted" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <many-to-one field="location" target-entity="PhpposLocations" fetch="LAZY">
+      <join-columns>
+        <join-column name="location_id" referenced-column-name="location_id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

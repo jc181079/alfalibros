@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="principalBundle\Entity\PhpposMessageReceiver" table="phppos_message_receiver">
+    <indexes>
+      <index name="phppos_message_receiver_ibfk_2" columns="receiver_id"/>
+      <index name="phppos_message_receiver_key_1" columns="message_id,receiver_id"/>
+      <index name="IDX_372D880F537A1329" columns="message_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="messageRead" type="integer" column="message_read" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <many-to-one field="receiver" target-entity="PhpposEmployees" fetch="LAZY">
+      <join-columns>
+        <join-column name="receiver_id" referenced-column-name="person_id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="message" target-entity="PhpposMessages" fetch="LAZY">
+      <join-columns>
+        <join-column name="message_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

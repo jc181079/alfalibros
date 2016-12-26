@@ -1,0 +1,169 @@
+<?php
+
+namespace principalBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * PhpposSalesPayments
+ *
+ * @ORM\Table(name="phppos_sales_payments", indexes={@ORM\Index(name="sale_id", columns={"sale_id"})})
+ * @ORM\Entity
+ */
+class PhpposSalesPayments
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="payment_type", type="string", length=255, nullable=false)
+     */
+    private $paymentType;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="payment_amount", type="decimal", precision=23, scale=10, nullable=false)
+     */
+    private $paymentAmount;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="auth_code", type="string", length=255, nullable=true)
+     */
+    private $authCode = '';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ref_no", type="string", length=255, nullable=true)
+     */
+    private $refNo = '';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="cc_token", type="string", length=255, nullable=true)
+     */
+    private $ccToken = '';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="acq_ref_data", type="string", length=255, nullable=true)
+     */
+    private $acqRefData = '';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="process_data", type="string", length=255, nullable=true)
+     */
+    private $processData = '';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="entry_method", type="string", length=255, nullable=true)
+     */
+    private $entryMethod = '';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="aid", type="string", length=255, nullable=true)
+     */
+    private $aid = '';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="tvr", type="string", length=255, nullable=true)
+     */
+    private $tvr = '';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="iad", type="string", length=255, nullable=true)
+     */
+    private $iad = '';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="tsi", type="string", length=255, nullable=true)
+     */
+    private $tsi = '';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="arc", type="string", length=255, nullable=true)
+     */
+    private $arc = '';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="cvm", type="string", length=255, nullable=true)
+     */
+    private $cvm = '';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="tran_type", type="string", length=255, nullable=true)
+     */
+    private $tranType = '';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="application_label", type="string", length=255, nullable=true)
+     */
+    private $applicationLabel = '';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="truncated_card", type="string", length=255, nullable=true)
+     */
+    private $truncatedCard = '';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="card_issuer", type="string", length=255, nullable=true)
+     */
+    private $cardIssuer = '';
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="payment_date", type="datetime", nullable=false)
+     */
+    private $paymentDate = 'CURRENT_TIMESTAMP';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="payment_id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $paymentId;
+
+    /**
+     * @var \principalBundle\Entity\PhpposSales
+     *
+     * @ORM\ManyToOne(targetEntity="principalBundle\Entity\PhpposSales")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="sale_id", referencedColumnName="sale_id")
+     * })
+     */
+    private $sale;
+
+
+}
+

@@ -1,0 +1,71 @@
+<?php
+
+namespace principalBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * PhpposGiftcards
+ *
+ * @ORM\Table(name="phppos_giftcards", uniqueConstraints={@ORM\UniqueConstraint(name="giftcard_number", columns={"giftcard_number"})}, indexes={@ORM\Index(name="deleted", columns={"deleted"}), @ORM\Index(name="phppos_giftcards_ibfk_1", columns={"customer_id"}), @ORM\Index(name="giftcard_number_search", columns={"description", "giftcard_number"})})
+ * @ORM\Entity
+ */
+class PhpposGiftcards
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="giftcard_number", type="string", length=255, nullable=true)
+     */
+    private $giftcardNumber;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", length=65535, nullable=false)
+     */
+    private $description;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="value", type="decimal", precision=23, scale=10, nullable=false)
+     */
+    private $value;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="inactive", type="integer", nullable=false)
+     */
+    private $inactive = '0';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="deleted", type="integer", nullable=false)
+     */
+    private $deleted = '0';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="giftcard_id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $giftcardId;
+
+    /**
+     * @var \principalBundle\Entity\PhpposCustomers
+     *
+     * @ORM\ManyToOne(targetEntity="principalBundle\Entity\PhpposCustomers")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="customer_id", referencedColumnName="person_id")
+     * })
+     */
+    private $customer;
+
+
+}
+

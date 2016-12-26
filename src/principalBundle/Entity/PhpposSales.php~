@@ -1,0 +1,211 @@
+<?php
+
+namespace principalBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * PhpposSales
+ *
+ * @ORM\Table(name="phppos_sales", indexes={@ORM\Index(name="customer_id", columns={"customer_id"}), @ORM\Index(name="employee_id", columns={"employee_id"}), @ORM\Index(name="deleted", columns={"deleted"}), @ORM\Index(name="location_id", columns={"location_id"}), @ORM\Index(name="phppos_sales_ibfk_4", columns={"deleted_by"}), @ORM\Index(name="sales_search", columns={"location_id", "store_account_payment", "sale_time", "sale_id"}), @ORM\Index(name="phppos_sales_ibfk_5", columns={"tier_id"}), @ORM\Index(name="phppos_sales_ibfk_7", columns={"register_id"}), @ORM\Index(name="phppos_sales_ibfk_6", columns={"sold_by_employee_id"}), @ORM\Index(name="phppos_sales_ibfk_8", columns={"signature_image_id"}), @ORM\Index(name="was_layaway", columns={"was_layaway"}), @ORM\Index(name="was_estimate", columns={"was_estimate"})})
+ * @ORM\Entity
+ */
+class PhpposSales
+{
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="sale_time", type="datetime", nullable=false)
+     */
+    private $saleTime = 'CURRENT_TIMESTAMP';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="comment", type="text", length=65535, nullable=false)
+     */
+    private $comment;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="show_comment_on_receipt", type="integer", nullable=false)
+     */
+    private $showCommentOnReceipt = '0';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="payment_type", type="text", length=65535, nullable=true)
+     */
+    private $paymentType;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="cc_ref_no", type="string", length=255, nullable=false)
+     */
+    private $ccRefNo;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="auth_code", type="string", length=255, nullable=true)
+     */
+    private $authCode = '';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="deleted", type="integer", nullable=false)
+     */
+    private $deleted = '0';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="suspended", type="integer", nullable=false)
+     */
+    private $suspended = '0';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="store_account_payment", type="integer", nullable=false)
+     */
+    private $storeAccountPayment = '0';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="was_layaway", type="integer", nullable=false)
+     */
+    private $wasLayaway = '0';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="was_estimate", type="integer", nullable=false)
+     */
+    private $wasEstimate = '0';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="points_used", type="decimal", precision=23, scale=10, nullable=false)
+     */
+    private $pointsUsed = '0.0000000000';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="points_gained", type="decimal", precision=23, scale=10, nullable=false)
+     */
+    private $pointsGained = '0.0000000000';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="did_redeem_discount", type="integer", nullable=false)
+     */
+    private $didRedeemDiscount = '0';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="deleted_taxes", type="text", length=65535, nullable=true)
+     */
+    private $deletedTaxes;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="sale_id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $saleId;
+
+    /**
+     * @var \principalBundle\Entity\PhpposEmployees
+     *
+     * @ORM\ManyToOne(targetEntity="principalBundle\Entity\PhpposEmployees")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="sold_by_employee_id", referencedColumnName="person_id")
+     * })
+     */
+    private $soldByEmployee;
+
+    /**
+     * @var \principalBundle\Entity\PhpposRegisters
+     *
+     * @ORM\ManyToOne(targetEntity="principalBundle\Entity\PhpposRegisters")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="register_id", referencedColumnName="register_id")
+     * })
+     */
+    private $register;
+
+    /**
+     * @var \principalBundle\Entity\PhpposAppFiles
+     *
+     * @ORM\ManyToOne(targetEntity="principalBundle\Entity\PhpposAppFiles")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="signature_image_id", referencedColumnName="file_id")
+     * })
+     */
+    private $signatureImage;
+
+    /**
+     * @var \principalBundle\Entity\PhpposPriceTiers
+     *
+     * @ORM\ManyToOne(targetEntity="principalBundle\Entity\PhpposPriceTiers")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="tier_id", referencedColumnName="id")
+     * })
+     */
+    private $tier;
+
+    /**
+     * @var \principalBundle\Entity\PhpposEmployees
+     *
+     * @ORM\ManyToOne(targetEntity="principalBundle\Entity\PhpposEmployees")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="deleted_by", referencedColumnName="person_id")
+     * })
+     */
+    private $deletedBy;
+
+    /**
+     * @var \principalBundle\Entity\PhpposCustomers
+     *
+     * @ORM\ManyToOne(targetEntity="principalBundle\Entity\PhpposCustomers")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="customer_id", referencedColumnName="person_id")
+     * })
+     */
+    private $customer;
+
+    /**
+     * @var \principalBundle\Entity\PhpposLocations
+     *
+     * @ORM\ManyToOne(targetEntity="principalBundle\Entity\PhpposLocations")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="location_id", referencedColumnName="location_id")
+     * })
+     */
+    private $location;
+
+    /**
+     * @var \principalBundle\Entity\PhpposEmployees
+     *
+     * @ORM\ManyToOne(targetEntity="principalBundle\Entity\PhpposEmployees")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="employee_id", referencedColumnName="person_id")
+     * })
+     */
+    private $employee;
+
+
+}
+

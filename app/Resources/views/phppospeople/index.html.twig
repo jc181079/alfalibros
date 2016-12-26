@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Phppospeoples list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Phonenumber</th>
+                <th>Email</th>
+                <th>Address1</th>
+                <th>Address2</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Zip</th>
+                <th>Country</th>
+                <th>Comments</th>
+                <th>Personid</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for phpposPerson in phpposPeoples %}
+            <tr>
+                <td><a href="{{ path('phppospeople_show', { 'id': phpposPerson.personId }) }}">{{ phpposPerson.firstName }}</a></td>
+                <td>{{ phpposPerson.lastName }}</td>
+                <td>{{ phpposPerson.phoneNumber }}</td>
+                <td>{{ phpposPerson.email }}</td>
+                <td>{{ phpposPerson.address1 }}</td>
+                <td>{{ phpposPerson.address2 }}</td>
+                <td>{{ phpposPerson.city }}</td>
+                <td>{{ phpposPerson.state }}</td>
+                <td>{{ phpposPerson.zip }}</td>
+                <td>{{ phpposPerson.country }}</td>
+                <td>{{ phpposPerson.comments }}</td>
+                <td>{{ phpposPerson.personId }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('phppospeople_show', { 'id': phpposPerson.personId }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('phppospeople_edit', { 'id': phpposPerson.personId }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('phppospeople_new') }}">Create a new phpposPerson</a>
+        </li>
+    </ul>
+{% endblock %}

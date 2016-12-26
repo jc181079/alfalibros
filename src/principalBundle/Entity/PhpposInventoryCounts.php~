@@ -1,0 +1,67 @@
+<?php
+
+namespace principalBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * PhpposInventoryCounts
+ *
+ * @ORM\Table(name="phppos_inventory_counts", indexes={@ORM\Index(name="phppos_inventory_counts_ibfk_1", columns={"employee_id"}), @ORM\Index(name="phppos_inventory_counts_ibfk_2", columns={"location_id"})})
+ * @ORM\Entity
+ */
+class PhpposInventoryCounts
+{
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="count_date", type="datetime", nullable=false)
+     */
+    private $countDate = '0000-00-00 00:00:00';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="status", type="string", length=255, nullable=false)
+     */
+    private $status;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="comment", type="text", length=65535, nullable=false)
+     */
+    private $comment;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \principalBundle\Entity\PhpposLocations
+     *
+     * @ORM\ManyToOne(targetEntity="principalBundle\Entity\PhpposLocations")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="location_id", referencedColumnName="location_id")
+     * })
+     */
+    private $location;
+
+    /**
+     * @var \principalBundle\Entity\PhpposEmployees
+     *
+     * @ORM\ManyToOne(targetEntity="principalBundle\Entity\PhpposEmployees")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="employee_id", referencedColumnName="person_id")
+     * })
+     */
+    private $employee;
+
+
+}
+

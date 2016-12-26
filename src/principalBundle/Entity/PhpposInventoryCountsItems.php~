@@ -1,0 +1,67 @@
+<?php
+
+namespace principalBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * PhpposInventoryCountsItems
+ *
+ * @ORM\Table(name="phppos_inventory_counts_items", indexes={@ORM\Index(name="phppos_inventory_counts_items_ibfk_1", columns={"inventory_counts_id"}), @ORM\Index(name="phppos_inventory_counts_items_ibfk_2", columns={"item_id"})})
+ * @ORM\Entity
+ */
+class PhpposInventoryCountsItems
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="count", type="decimal", precision=23, scale=10, nullable=true)
+     */
+    private $count = '0.0000000000';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="actual_quantity", type="decimal", precision=23, scale=10, nullable=true)
+     */
+    private $actualQuantity = '0.0000000000';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="comment", type="text", length=65535, nullable=false)
+     */
+    private $comment;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \principalBundle\Entity\PhpposItems
+     *
+     * @ORM\ManyToOne(targetEntity="principalBundle\Entity\PhpposItems")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="item_id", referencedColumnName="item_id")
+     * })
+     */
+    private $item;
+
+    /**
+     * @var \principalBundle\Entity\PhpposInventoryCounts
+     *
+     * @ORM\ManyToOne(targetEntity="principalBundle\Entity\PhpposInventoryCounts")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="inventory_counts_id", referencedColumnName="id")
+     * })
+     */
+    private $inventoryCounts;
+
+
+}
+

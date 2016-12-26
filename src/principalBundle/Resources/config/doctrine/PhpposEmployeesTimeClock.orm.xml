@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="principalBundle\Entity\PhpposEmployeesTimeClock" table="phppos_employees_time_clock">
+    <indexes>
+      <index name="phppos_employees_time_clock_ibfk_1" columns="employee_id"/>
+      <index name="phppos_employees_time_clock_ibfk_2" columns="location_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="clockIn" type="datetime" column="clock_in" nullable="false">
+      <options>
+        <option name="default">0000-00-00 00:00:00</option>
+      </options>
+    </field>
+    <field name="clockOut" type="datetime" column="clock_out" nullable="false">
+      <options>
+        <option name="default">0000-00-00 00:00:00</option>
+      </options>
+    </field>
+    <field name="clockInComment" type="text" column="clock_in_comment" length="65535" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="clockOutComment" type="text" column="clock_out_comment" length="65535" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="hourlyPayRate" type="decimal" column="hourly_pay_rate" precision="23" scale="10" nullable="false">
+      <options>
+        <option name="default">0.0000000000</option>
+      </options>
+    </field>
+    <many-to-one field="location" target-entity="PhpposLocations" fetch="LAZY">
+      <join-columns>
+        <join-column name="location_id" referenced-column-name="location_id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="employee" target-entity="PhpposEmployees" fetch="LAZY">
+      <join-columns>
+        <join-column name="employee_id" referenced-column-name="person_id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

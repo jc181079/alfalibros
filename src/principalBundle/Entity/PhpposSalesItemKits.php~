@@ -1,0 +1,92 @@
+<?php
+
+namespace principalBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * PhpposSalesItemKits
+ *
+ * @ORM\Table(name="phppos_sales_item_kits", indexes={@ORM\Index(name="item_kit_id", columns={"item_kit_id"}), @ORM\Index(name="IDX_F9665BF54A7E4868", columns={"sale_id"})})
+ * @ORM\Entity
+ */
+class PhpposSalesItemKits
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string", length=255, nullable=true)
+     */
+    private $description;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="quantity_purchased", type="decimal", precision=23, scale=10, nullable=false)
+     */
+    private $quantityPurchased = '0.0000000000';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="item_kit_cost_price", type="decimal", precision=23, scale=10, nullable=false)
+     */
+    private $itemKitCostPrice;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="item_kit_unit_price", type="decimal", precision=23, scale=10, nullable=false)
+     */
+    private $itemKitUnitPrice;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="discount_percent", type="decimal", precision=15, scale=3, nullable=false)
+     */
+    private $discountPercent = '0.000';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="commission", type="decimal", precision=23, scale=10, nullable=false)
+     */
+    private $commission = '0.0000000000';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="line", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $line;
+
+    /**
+     * @var \principalBundle\Entity\PhpposSales
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\OneToOne(targetEntity="principalBundle\Entity\PhpposSales")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="sale_id", referencedColumnName="sale_id")
+     * })
+     */
+    private $sale;
+
+    /**
+     * @var \principalBundle\Entity\PhpposItemKits
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\OneToOne(targetEntity="principalBundle\Entity\PhpposItemKits")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="item_kit_id", referencedColumnName="item_kit_id")
+     * })
+     */
+    private $itemKit;
+
+
+}
+

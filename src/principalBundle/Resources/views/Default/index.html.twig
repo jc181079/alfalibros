@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+{% use "::navbarAdvance.html.twig" %}
+{% use "::info.html.twig" %}
+{% use "::acordion.html.twig" %}
+{% use "principalBundle:Default:productList.html.twig" %}
+{% block stylesheets %}
+	{{ parent() }}
+	<style>
+		body,h1,h2,h3,h4,h5 {
+			font-family: "Open Sans", sans-serif;
+			
+			margin-top: 45px;
+		} 
+	</style>
+{% endblock %}
+
+{% block body %}
+	{% for flashMessage in app.session.flashbag.get('Mensaje') %}
+            <div class="alert alert-danger" role="alert">
+                <span class="glyphicon glyphicon-warning-sign" ></span> 
+                {{flashMessage}}...
+            </div>
+     {% endfor%}
+	{% block navbar %}
+        {{ parent() }}
+    {% endblock %}
+    <br>
+    <div class="container-fluid"> 	
+        <!-- creacion de la estructura de triple div -->
+        <div class ="row">
+                <!-- creacion del div de informacion-->
+                <div class ="col-md-8 ">
+                    {% block info %}
+                        {{ parent() }}
+                    {% endblock %}
+                    <br>
+                    {% block acordion %}
+                        {{ parent() }}
+                    {% endblock %}
+                    a
+                </div>
+            <!-- creacion del div de contenido de producto-->
+            <div class ="col-md-4">
+                {% for p1 in producto1 %}
+                  <div  class="w3-padding-large2 w3-theme-d8">  
+                        <form method="post" action="#">  
+                            <div class="w3-padding-large2 w3-theme-d8">                           
+                                <!-- IMAGENES -->                           
+                                <a href="{{ p1.fileData }}""><span class="text-info"><img src="data:image/png;base64,{{ p1.fileData }}"></a><br />{{ p1.fileData }}
+                                <!-- Titulo y Link -->                                
+                                <a href="#">
+                                  <span class="text-info">                       
+                                  <!-- Titulo y Link -->                               
+                                       //{{ p1.name }}                                            
+                                  </span>
+                                </a>                             
+                                <h4 class="text-danger">{{ p1.unitPrice }}</h4>  
+                                <input type="text" name="quantity" class="form-control" value="" />  
+                                <input type="hidden" name="hidden_name" value="" />  
+                                <input type="hidden" name="hidden_price" value="" />  
+                                <input type="submit" name="add_to_cart" style="margin-top:5px;" class="btn btn-success" value="Agregar" />              
+                            </div>
+                        </form>  
+                  </div>
+                {% endfor %}                
+            </div>
+            <!-- creacion del div de contenido de producto-->
+            <div class ="col-xs-6 col-md-4">
+                
+
+            </div>
+        </div>
+        <!-- fin creacion de la estructura de triple div -->
+    </div>
+    
+    
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    
+    <script type="text/javascript">
+        $(document).ready(function() {
+            
+           $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
+                event.preventDefault();
+                $(this).ekkoLightbox();
+            }); 
+        });
+          
+    </script>
+    
+{% endblock %}

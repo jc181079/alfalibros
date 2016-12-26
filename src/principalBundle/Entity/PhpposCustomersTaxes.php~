@@ -1,0 +1,57 @@
+<?php
+
+namespace principalBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * PhpposCustomersTaxes
+ *
+ * @ORM\Table(name="phppos_customers_taxes", uniqueConstraints={@ORM\UniqueConstraint(name="unique_tax", columns={"customer_id", "name", "percent"})}, indexes={@ORM\Index(name="IDX_F44C405F9395C3F3", columns={"customer_id"})})
+ * @ORM\Entity
+ */
+class PhpposCustomersTaxes
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255, nullable=false)
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="percent", type="decimal", precision=15, scale=3, nullable=false)
+     */
+    private $percent;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="cumulative", type="integer", nullable=false)
+     */
+    private $cumulative = '0';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \principalBundle\Entity\PhpposCustomers
+     *
+     * @ORM\ManyToOne(targetEntity="principalBundle\Entity\PhpposCustomers")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="customer_id", referencedColumnName="person_id")
+     * })
+     */
+    private $customer;
+
+
+}
+

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="principalBundle\Entity\PhpposItemKitsTaxes" table="phppos_item_kits_taxes">
+    <indexes>
+      <index name="IDX_8E30B39DBC771520" columns="item_kit_id"/>
+    </indexes>
+    <unique-constraints>
+      <unique-constraint name="unique_tax" columns="item_kit_id,name,percent"/>
+    </unique-constraints>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="name" type="string" column="name" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="percent" type="decimal" column="percent" precision="15" scale="3" nullable="false"/>
+    <field name="cumulative" type="integer" column="cumulative" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <many-to-one field="itemKit" target-entity="PhpposItemKits" fetch="LAZY">
+      <join-columns>
+        <join-column name="item_kit_id" referenced-column-name="item_kit_id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

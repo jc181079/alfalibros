@@ -1,0 +1,62 @@
+<?php
+
+namespace principalBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * PhpposTags
+ *
+ * @ORM\Table(name="phppos_tags", uniqueConstraints={@ORM\UniqueConstraint(name="tag_name", columns={"name"})}, indexes={@ORM\Index(name="deleted", columns={"deleted"}), @ORM\Index(name="name_search", columns={"name"})})
+ * @ORM\Entity
+ */
+class PhpposTags
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="deleted", type="integer", nullable=false)
+     */
+    private $deleted = '0';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255, nullable=true)
+     */
+    private $name;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="principalBundle\Entity\PhpposItems", mappedBy="tag")
+     */
+    private $item;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="principalBundle\Entity\PhpposItemKits", mappedBy="tag")
+     */
+    private $itemKit;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->item = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->itemKit = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}
+

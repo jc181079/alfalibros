@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Phpposemployee</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Username</th>
+                <td>{{ phpposEmployee.username }}</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>{{ phpposEmployee.password }}</td>
+            </tr>
+            <tr>
+                <th>Forcepasswordchange</th>
+                <td>{{ phpposEmployee.forcePasswordChange }}</td>
+            </tr>
+            <tr>
+                <th>Language</th>
+                <td>{{ phpposEmployee.language }}</td>
+            </tr>
+            <tr>
+                <th>Commissionpercent</th>
+                <td>{{ phpposEmployee.commissionPercent }}</td>
+            </tr>
+            <tr>
+                <th>Commissionpercenttype</th>
+                <td>{{ phpposEmployee.commissionPercentType }}</td>
+            </tr>
+            <tr>
+                <th>Hourlypayrate</th>
+                <td>{{ phpposEmployee.hourlyPayRate }}</td>
+            </tr>
+            <tr>
+                <th>Inactive</th>
+                <td>{{ phpposEmployee.inactive }}</td>
+            </tr>
+            <tr>
+                <th>Reasoninactive</th>
+                <td>{{ phpposEmployee.reasonInactive }}</td>
+            </tr>
+            <tr>
+                <th>Hiredate</th>
+                <td>{% if phpposEmployee.hireDate %}{{ phpposEmployee.hireDate|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Employeenumber</th>
+                <td>{{ phpposEmployee.employeeNumber }}</td>
+            </tr>
+            <tr>
+                <th>Birthday</th>
+                <td>{% if phpposEmployee.birthday %}{{ phpposEmployee.birthday|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Terminationdate</th>
+                <td>{% if phpposEmployee.terminationDate %}{{ phpposEmployee.terminationDate|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Deleted</th>
+                <td>{{ phpposEmployee.deleted }}</td>
+            </tr>
+            <tr>
+                <th>Id</th>
+                <td>{{ phpposEmployee.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('phpposemployees_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('phpposemployees_edit', { 'id': phpposEmployee.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

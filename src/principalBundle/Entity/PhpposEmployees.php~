@@ -1,0 +1,164 @@
+<?php
+
+namespace principalBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * PhpposEmployees
+ *
+ * @ORM\Table(name="phppos_employees", uniqueConstraints={@ORM\UniqueConstraint(name="username", columns={"username"}), @ORM\UniqueConstraint(name="employee_number", columns={"employee_number"})}, indexes={@ORM\Index(name="person_id", columns={"person_id"}), @ORM\Index(name="deleted", columns={"deleted"}), @ORM\Index(name="username_search", columns={"username"})})
+ * @ORM\Entity
+ */
+class PhpposEmployees
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="username", type="string", length=255, nullable=true)
+     */
+    private $username;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="password", type="string", length=255, nullable=false)
+     */
+    private $password;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="force_password_change", type="integer", nullable=false)
+     */
+    private $forcePasswordChange = '0';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="language", type="string", length=255, nullable=true)
+     */
+    private $language;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="commission_percent", type="decimal", precision=23, scale=10, nullable=true)
+     */
+    private $commissionPercent = '0.0000000000';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="commission_percent_type", type="string", length=255, nullable=true)
+     */
+    private $commissionPercentType = '';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="hourly_pay_rate", type="decimal", precision=23, scale=10, nullable=false)
+     */
+    private $hourlyPayRate = '0.0000000000';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="inactive", type="integer", nullable=false)
+     */
+    private $inactive = '0';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="reason_inactive", type="text", length=65535, nullable=true)
+     */
+    private $reasonInactive;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="hire_date", type="date", nullable=true)
+     */
+    private $hireDate;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="employee_number", type="string", length=255, nullable=true)
+     */
+    private $employeeNumber;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="birthday", type="date", nullable=true)
+     */
+    private $birthday;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="termination_date", type="date", nullable=true)
+     */
+    private $terminationDate;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="deleted", type="integer", nullable=false)
+     */
+    private $deleted = '0';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \principalBundle\Entity\PhpposPeople
+     *
+     * @ORM\ManyToOne(targetEntity="principalBundle\Entity\PhpposPeople")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="person_id", referencedColumnName="person_id")
+     * })
+     */
+    private $person;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="principalBundle\Entity\PhpposModules", mappedBy="person")
+     */
+    private $module;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="principalBundle\Entity\PhpposLocations", inversedBy="employee")
+     * @ORM\JoinTable(name="phppos_employees_locations",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="employee_id", referencedColumnName="person_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="location_id", referencedColumnName="location_id")
+     *   }
+     * )
+     */
+    private $location;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->module = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->location = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}
+

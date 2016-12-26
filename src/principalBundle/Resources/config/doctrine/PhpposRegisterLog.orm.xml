@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="principalBundle\Entity\PhpposRegisterLog" table="phppos_register_log">
+    <indexes>
+      <index name="phppos_register_log_ibfk_1" columns="employee_id_open"/>
+      <index name="phppos_register_log_ibfk_2" columns="register_id"/>
+      <index name="phppos_register_log_ibfk_3" columns="employee_id_close"/>
+    </indexes>
+    <id name="registerLogId" type="integer" column="register_log_id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="shiftStart" type="datetime" column="shift_start" nullable="false">
+      <options>
+        <option name="default">0000-00-00 00:00:00</option>
+      </options>
+    </field>
+    <field name="shiftEnd" type="datetime" column="shift_end" nullable="false">
+      <options>
+        <option name="default">0000-00-00 00:00:00</option>
+      </options>
+    </field>
+    <field name="openAmount" type="decimal" column="open_amount" precision="23" scale="10" nullable="false"/>
+    <field name="closeAmount" type="decimal" column="close_amount" precision="23" scale="10" nullable="false"/>
+    <field name="cashSalesAmount" type="decimal" column="cash_sales_amount" precision="23" scale="10" nullable="false"/>
+    <field name="totalCashAdditions" type="decimal" column="total_cash_additions" precision="23" scale="10" nullable="false">
+      <options>
+        <option name="default">0.0000000000</option>
+      </options>
+    </field>
+    <field name="totalCashSubtractions" type="decimal" column="total_cash_subtractions" precision="23" scale="10" nullable="false">
+      <options>
+        <option name="default">0.0000000000</option>
+      </options>
+    </field>
+    <field name="notes" type="string" column="notes" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="deleted" type="integer" column="deleted" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <many-to-one field="employeeClose" target-entity="PhpposEmployees" fetch="LAZY">
+      <join-columns>
+        <join-column name="employee_id_close" referenced-column-name="person_id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="register" target-entity="PhpposRegisters" fetch="LAZY">
+      <join-columns>
+        <join-column name="register_id" referenced-column-name="register_id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="employeeOpen" target-entity="PhpposEmployees" fetch="LAZY">
+      <join-columns>
+        <join-column name="employee_id_open" referenced-column-name="person_id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

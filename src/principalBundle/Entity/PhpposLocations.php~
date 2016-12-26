@@ -1,0 +1,324 @@
+<?php
+
+namespace principalBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * PhpposLocations
+ *
+ * @ORM\Table(name="phppos_locations", indexes={@ORM\Index(name="deleted", columns={"deleted"}), @ORM\Index(name="full_search", columns={"name", "address", "phone", "email"}), @ORM\Index(name="name_search", columns={"name"}), @ORM\Index(name="address_search", columns={"address"}), @ORM\Index(name="phone_search", columns={"phone"}), @ORM\Index(name="email_search", columns={"email"})})
+ * @ORM\Entity
+ */
+class PhpposLocations
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="text", length=65535, nullable=true)
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="address", type="text", length=65535, nullable=true)
+     */
+    private $address;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="phone", type="text", length=65535, nullable=true)
+     */
+    private $phone;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="fax", type="text", length=65535, nullable=true)
+     */
+    private $fax;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="text", length=65535, nullable=true)
+     */
+    private $email;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="color", type="text", length=65535, nullable=true)
+     */
+    private $color;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="return_policy", type="text", length=65535, nullable=true)
+     */
+    private $returnPolicy;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="receive_stock_alert", type="text", length=65535, nullable=true)
+     */
+    private $receiveStockAlert;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="stock_alert_email", type="text", length=65535, nullable=true)
+     */
+    private $stockAlertEmail;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="timezone", type="text", length=65535, nullable=true)
+     */
+    private $timezone;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="mailchimp_api_key", type="text", length=65535, nullable=true)
+     */
+    private $mailchimpApiKey;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="enable_credit_card_processing", type="text", length=65535, nullable=true)
+     */
+    private $enableCreditCardProcessing;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="credit_card_processor", type="text", length=65535, nullable=true)
+     */
+    private $creditCardProcessor;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="hosted_checkout_merchant_id", type="text", length=65535, nullable=true)
+     */
+    private $hostedCheckoutMerchantId;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="hosted_checkout_merchant_password", type="text", length=65535, nullable=true)
+     */
+    private $hostedCheckoutMerchantPassword;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="emv_merchant_id", type="text", length=65535, nullable=true)
+     */
+    private $emvMerchantId;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="listener_port", type="text", length=65535, nullable=true)
+     */
+    private $listenerPort;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="com_port", type="text", length=65535, nullable=true)
+     */
+    private $comPort;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="stripe_public", type="text", length=65535, nullable=true)
+     */
+    private $stripePublic;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="stripe_private", type="text", length=65535, nullable=true)
+     */
+    private $stripePrivate;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="stripe_currency_code", type="text", length=65535, nullable=true)
+     */
+    private $stripeCurrencyCode;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="braintree_merchant_id", type="text", length=65535, nullable=true)
+     */
+    private $braintreeMerchantId;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="braintree_public_key", type="text", length=65535, nullable=true)
+     */
+    private $braintreePublicKey;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="braintree_private_key", type="text", length=65535, nullable=true)
+     */
+    private $braintreePrivateKey;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="default_tax_1_rate", type="text", length=65535, nullable=true)
+     */
+    private $defaultTax1Rate;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="default_tax_1_name", type="text", length=65535, nullable=true)
+     */
+    private $defaultTax1Name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="default_tax_2_rate", type="text", length=65535, nullable=true)
+     */
+    private $defaultTax2Rate;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="default_tax_2_name", type="text", length=65535, nullable=true)
+     */
+    private $defaultTax2Name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="default_tax_2_cumulative", type="text", length=65535, nullable=true)
+     */
+    private $defaultTax2Cumulative;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="default_tax_3_rate", type="text", length=65535, nullable=true)
+     */
+    private $defaultTax3Rate;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="default_tax_3_name", type="text", length=65535, nullable=true)
+     */
+    private $defaultTax3Name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="default_tax_4_rate", type="text", length=65535, nullable=true)
+     */
+    private $defaultTax4Rate;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="default_tax_4_name", type="text", length=65535, nullable=true)
+     */
+    private $defaultTax4Name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="default_tax_5_rate", type="text", length=65535, nullable=true)
+     */
+    private $defaultTax5Rate;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="default_tax_5_name", type="text", length=65535, nullable=true)
+     */
+    private $defaultTax5Name;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="deleted", type="integer", nullable=true)
+     */
+    private $deleted = '0';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="location_id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $locationId;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="principalBundle\Entity\PhpposItems", inversedBy="location")
+     * @ORM\JoinTable(name="phppos_location_items",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="location_id", referencedColumnName="location_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="item_id", referencedColumnName="item_id")
+     *   }
+     * )
+     */
+    private $item;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="principalBundle\Entity\PhpposItemKits", inversedBy="location")
+     * @ORM\JoinTable(name="phppos_location_item_kits",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="location_id", referencedColumnName="location_id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="item_kit_id", referencedColumnName="item_kit_id")
+     *   }
+     * )
+     */
+    private $itemKit;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="principalBundle\Entity\PhpposEmployees", mappedBy="location")
+     */
+    private $employee;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->item = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->itemKit = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->employee = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}
+

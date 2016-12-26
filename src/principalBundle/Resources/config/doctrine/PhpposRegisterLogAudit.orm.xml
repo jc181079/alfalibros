@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="principalBundle\Entity\PhpposRegisterLogAudit" table="phppos_register_log_audit">
+    <indexes>
+      <index name="register_log_audit_ibfk_1" columns="register_log_id"/>
+      <index name="register_log_audit_ibfk_2" columns="employee_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="date" type="datetime" column="date" nullable="false">
+      <options>
+        <option name="default">CURRENT_TIMESTAMP</option>
+      </options>
+    </field>
+    <field name="amount" type="decimal" column="amount" precision="23" scale="10" nullable="false">
+      <options>
+        <option name="default">0.0000000000</option>
+      </options>
+    </field>
+    <field name="note" type="text" column="note" length="65535" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="employee" target-entity="PhpposEmployees" fetch="LAZY">
+      <join-columns>
+        <join-column name="employee_id" referenced-column-name="person_id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="registerLog" target-entity="PhpposRegisterLog" fetch="LAZY">
+      <join-columns>
+        <join-column name="register_log_id" referenced-column-name="register_log_id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

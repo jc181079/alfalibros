@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="principalBundle\Entity\PhpposExpenses" table="phppos_expenses">
+    <indexes>
+      <index name="location_id" columns="location_id"/>
+      <index name="employee_id" columns="employee_id"/>
+      <index name="approved_employee_id" columns="approved_employee_id"/>
+      <index name="category_id" columns="category_id"/>
+      <index name="deleted" columns="deleted"/>
+      <index name="full_search" columns="expense_type,expense_description,expense_reason,expense_note"/>
+      <index name="expense_type_search" columns="expense_type"/>
+      <index name="expense_description_search" columns="expense_description"/>
+      <index name="expense_reason_search" columns="expense_reason"/>
+      <index name="expense_note_search" columns="expense_note"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="expenseType" type="string" column="expense_type" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="expenseDescription" type="text" column="expense_description" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="expenseReason" type="string" column="expense_reason" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="expenseDate" type="datetime" column="expense_date" nullable="false">
+      <options>
+        <option name="default">CURRENT_TIMESTAMP</option>
+      </options>
+    </field>
+    <field name="expenseAmount" type="decimal" column="expense_amount" precision="23" scale="10" nullable="false"/>
+    <field name="expenseTax" type="decimal" column="expense_tax" precision="23" scale="10" nullable="false"/>
+    <field name="expenseNote" type="string" column="expense_note" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="deleted" type="integer" column="deleted" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <many-to-one field="approvedEmployee" target-entity="PhpposEmployees" fetch="LAZY">
+      <join-columns>
+        <join-column name="approved_employee_id" referenced-column-name="person_id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="category" target-entity="PhpposCategories" fetch="LAZY">
+      <join-columns>
+        <join-column name="category_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="employee" target-entity="PhpposEmployees" fetch="LAZY">
+      <join-columns>
+        <join-column name="employee_id" referenced-column-name="person_id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="location" target-entity="PhpposLocations" fetch="LAZY">
+      <join-columns>
+        <join-column name="location_id" referenced-column-name="location_id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

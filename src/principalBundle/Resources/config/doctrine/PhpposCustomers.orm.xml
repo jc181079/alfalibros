@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="principalBundle\Entity\PhpposCustomers" table="phppos_customers">
+    <indexes>
+      <index name="person_id" columns="person_id"/>
+      <index name="deleted" columns="deleted"/>
+      <index name="cc_token" columns="cc_token"/>
+      <index name="phppos_customers_ibfk_2" columns="tier_id"/>
+      <index name="full_search" columns="account_number,company_name,tax_certificate"/>
+      <index name="account_number_search" columns="account_number"/>
+      <index name="company_name_search" columns="company_name"/>
+      <index name="tax_certificate_search" columns="tax_certificate"/>
+    </indexes>
+    <unique-constraints>
+      <unique-constraint name="account_number" columns="account_number"/>
+    </unique-constraints>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="accountNumber" type="string" column="account_number" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="overrideDefaultTax" type="integer" column="override_default_tax" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="companyName" type="string" column="company_name" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="balance" type="decimal" column="balance" precision="23" scale="10" nullable="false">
+      <options>
+        <option name="default">0.0000000000</option>
+      </options>
+    </field>
+    <field name="creditLimit" type="decimal" column="credit_limit" precision="23" scale="10" nullable="true"/>
+    <field name="points" type="decimal" column="points" precision="23" scale="10" nullable="false">
+      <options>
+        <option name="default">0.0000000000</option>
+      </options>
+    </field>
+    <field name="currentSpendForPoints" type="decimal" column="current_spend_for_points" precision="23" scale="10" nullable="false">
+      <options>
+        <option name="default">0.0000000000</option>
+      </options>
+    </field>
+    <field name="currentSalesForDiscount" type="integer" column="current_sales_for_discount" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="taxable" type="integer" column="taxable" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="default">1</option>
+      </options>
+    </field>
+    <field name="taxCertificate" type="string" column="tax_certificate" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="default"/>
+      </options>
+    </field>
+    <field name="ccToken" type="string" column="cc_token" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="ccPreview" type="string" column="cc_preview" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="cardIssuer" type="string" column="card_issuer" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+        <option name="default"/>
+      </options>
+    </field>
+    <field name="deleted" type="integer" column="deleted" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <many-to-one field="tier" target-entity="PhpposPriceTiers" fetch="LAZY">
+      <join-columns>
+        <join-column name="tier_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="person" target-entity="PhpposPeople" fetch="LAZY">
+      <join-columns>
+        <join-column name="person_id" referenced-column-name="person_id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

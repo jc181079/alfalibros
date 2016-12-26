@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="principalBundle\Entity\PhpposGiftcardsLog" table="phppos_giftcards_log">
+    <indexes>
+      <index name="phppos_giftcards_log_ibfk_1" columns="giftcard_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="logDate" type="datetime" column="log_date" nullable="false">
+      <options>
+        <option name="default">CURRENT_TIMESTAMP</option>
+      </options>
+    </field>
+    <field name="transactionAmount" type="decimal" column="transaction_amount" precision="23" scale="10" nullable="false"/>
+    <field name="logMessage" type="text" column="log_message" length="65535" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="giftcard" target-entity="PhpposGiftcards" fetch="LAZY">
+      <join-columns>
+        <join-column name="giftcard_id" referenced-column-name="giftcard_id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,47 @@
+<?php
+
+namespace principalBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * PhpposSessions
+ *
+ * @ORM\Table(name="phppos_sessions", indexes={@ORM\Index(name="phppos_sessions_timestamp", columns={"timestamp"})})
+ * @ORM\Entity
+ */
+class PhpposSessions
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ip_address", type="string", length=45, nullable=false)
+     */
+    private $ipAddress;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="timestamp", type="integer", nullable=false)
+     */
+    private $timestamp = '0';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="data", type="blob", nullable=false)
+     */
+    private $data;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="id", type="string", length=40)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+
+}
+

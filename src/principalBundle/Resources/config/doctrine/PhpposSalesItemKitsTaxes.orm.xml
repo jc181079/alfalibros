@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="principalBundle\Entity\PhpposSalesItemKitsTaxes" table="phppos_sales_item_kits_taxes">
+    <indexes>
+      <index name="item_id" columns="item_kit_id"/>
+      <index name="IDX_E672DD944A7E4868" columns="sale_id"/>
+    </indexes>
+    <id name="line" type="integer" column="line"/>
+    <id name="name" type="string" column="name" length="255"/>
+    <id name="percent" type="decimal" column="percent"/>
+    <id name="sale" association-key="true"/>
+    <id name="itemKit" association-key="true"/>
+    <field name="cumulative" type="integer" column="cumulative" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <one-to-one field="itemKit" target-entity="PhpposItemKits" fetch="LAZY">
+      <join-columns>
+        <join-column name="item_kit_id" referenced-column-name="item_kit_id"/>
+      </join-columns>
+    </one-to-one>
+    <one-to-one field="sale" target-entity="PhpposSalesItemKits" fetch="LAZY">
+      <join-columns>
+        <join-column name="sale_id" referenced-column-name="sale_id"/>
+      </join-columns>
+    </one-to-one>
+  </entity>
+</doctrine-mapping>

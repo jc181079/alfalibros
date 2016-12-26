@@ -1,0 +1,25 @@
+{% block productList %}
+  {% for p1 in producto1 %}
+  <div  class="w3-padding-large2 w3-theme-d8">  
+        <form method="post" action="#">  
+            <div class="w3-padding-large2 w3-theme-d8">                           
+                <!-- IMAGENES -->                           
+                <a href="#"><span class="text-info">{{ p1.file_data }}</a><br />
+                <!-- Titulo y Link -->
+                ssss
+                <a href="#">
+                  <span class="text-info">                       
+                  <!-- Titulo y Link -->                               
+                       {{ p1.name }}                                            
+                  </span>
+                </a>                             
+                <h4 class="text-danger">{{ p1.unit_price }}</h4>  
+                <input type="text" name="quantity" class="form-control" value="" />  
+                <input type="hidden" name="hidden_name" value="" />  
+                <input type="hidden" name="hidden_price" value="" />  
+                <input type="submit" name="add_to_cart" style="margin-top:5px;" class="btn btn-success" value="Agregar" />              
+            </div>
+        </form>  
+  </div>
+{% endfor %}
+{% endblock %}  
