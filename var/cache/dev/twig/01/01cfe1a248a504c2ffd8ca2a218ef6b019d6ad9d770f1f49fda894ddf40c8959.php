@@ -1,0 +1,113 @@
+<?php
+
+/* phpposemployees/new.html.twig */
+class __TwigTemplate_a960299647a8b54a9e6dc69fd067976937ad2a08341d9f10cd0edd2b75b0184f extends Twig_Template
+{
+    public function __construct(Twig_Environment $env)
+    {
+        parent::__construct($env);
+
+        // line 1
+        $this->parent = $this->loadTemplate("base.html.twig", "phpposemployees/new.html.twig", 1);
+        $this->blocks = array(
+            'body' => array($this, 'block_body'),
+        );
+    }
+
+    protected function doGetParent(array $context)
+    {
+        return "base.html.twig";
+    }
+
+    protected function doDisplay(array $context, array $blocks = array())
+    {
+        $__internal_b2a8c3d4bc244b02f003ea34cad5ffce7845fa4f9f658d365eb061d8f950226c = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_b2a8c3d4bc244b02f003ea34cad5ffce7845fa4f9f658d365eb061d8f950226c->enter($__internal_b2a8c3d4bc244b02f003ea34cad5ffce7845fa4f9f658d365eb061d8f950226c_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "phpposemployees/new.html.twig"));
+
+        $this->parent->display($context, array_merge($this->blocks, $blocks));
+        
+        $__internal_b2a8c3d4bc244b02f003ea34cad5ffce7845fa4f9f658d365eb061d8f950226c->leave($__internal_b2a8c3d4bc244b02f003ea34cad5ffce7845fa4f9f658d365eb061d8f950226c_prof);
+
+    }
+
+    // line 3
+    public function block_body($context, array $blocks = array())
+    {
+        $__internal_23525b7428c8fe1b638ceb59a7c26f3d3cb1b9d8a2e072a2f4b58b6b44a36588 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_23525b7428c8fe1b638ceb59a7c26f3d3cb1b9d8a2e072a2f4b58b6b44a36588->enter($__internal_23525b7428c8fe1b638ceb59a7c26f3d3cb1b9d8a2e072a2f4b58b6b44a36588_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
+
+        // line 4
+        echo "    <h1>Phpposemployee creation</h1>
+
+    ";
+        // line 6
+        echo         $this->env->getExtension('Symfony\Bridge\Twig\Extension\FormExtension')->renderer->renderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'form_start');
+        echo "
+        ";
+        // line 7
+        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\FormExtension')->renderer->searchAndRenderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'widget');
+        echo "
+        <input type=\"submit\" value=\"Create\" />
+    ";
+        // line 9
+        echo         $this->env->getExtension('Symfony\Bridge\Twig\Extension\FormExtension')->renderer->renderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'form_end');
+        echo "
+
+    <ul>
+        <li>
+            <a href=\"";
+        // line 13
+        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("phpposemployees_index");
+        echo "\">Back to the list</a>
+        </li>
+    </ul>
+";
+        
+        $__internal_23525b7428c8fe1b638ceb59a7c26f3d3cb1b9d8a2e072a2f4b58b6b44a36588->leave($__internal_23525b7428c8fe1b638ceb59a7c26f3d3cb1b9d8a2e072a2f4b58b6b44a36588_prof);
+
+    }
+
+    public function getTemplateName()
+    {
+        return "phpposemployees/new.html.twig";
+    }
+
+    public function isTraitable()
+    {
+        return false;
+    }
+
+    public function getDebugInfo()
+    {
+        return array (  60 => 13,  53 => 9,  48 => 7,  44 => 6,  40 => 4,  34 => 3,  11 => 1,);
+    }
+
+    /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
+    public function getSource()
+    {
+        @trigger_error('The '.__METHOD__.' method is deprecated since version 1.27 and will be removed in 2.0. Use getSourceContext() instead.', E_USER_DEPRECATED);
+
+        return $this->getSourceContext()->getCode();
+    }
+
+    public function getSourceContext()
+    {
+        return new Twig_Source("{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Phpposemployee creation</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type=\"submit\" value=\"Create\" />
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+            <a href=\"{{ path('phpposemployees_index') }}\">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}
+", "phpposemployees/new.html.twig", "C:\\xampp\\htdocs\\alfalibros\\app\\Resources\\views\\phpposemployees\\new.html.twig");
+    }
+}
