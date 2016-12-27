@@ -14,42 +14,79 @@ use principalBundle\Entity\PhpposAppFiles;
 class principalController extends Controller
 {
     /**
-     * @Route("/", name="inicio")
+     * @Route("/{pagina}", name="inicio", requirements={"pagina": "\d+"})
      */
-    public function indexAction(Request $request)
+    public function indexAction(Request $request,$pagina=1)
     {
         $session = $request->getSession();
         $em = $this->getDoctrine()->getManager();
+        /*
+        * inicio de la paginacion
+        */
+        $trItem= $this->contadorReg(); //se consigue el total de los registros
+        $regPorPagina= 10;
+        $totalRegPorPagina=ceil($trItem/$regPorPagina);
+
+        if(!is_numeric($pagina)){
+            $pagina=1;
+        } else {
+            $pagina=floor($pagina);
+        }
+
+        if($trItem<=$regPorPagina){
+            $pagina=1;
+        }
+
+        if(($pagina*$regPorPagina)>$trItem){
+            $pagina=$totalRegPorPagina;
+        }
+
+        $offSet=0;
+        if($pagina>1){
+            $offSet=$regPorPagina*($pagina-1);
+        }
+
+        //fin de la paginacion
+
+        //die('total'.$trItem);
         $queryLibros= $em->createQuery(
            'select i.name,i.unitPrice, c.name, af.fileData,af.fileName 
             from principalBundle:PhpposItems i, principalBundle:PhpposCategories c, 
             principalBundle:PhpposAppFiles af 
             where i.category = 1 and           
             c.parent= i.category and           
-            af.fileId=i.image '
-            );
+            af.fileId=i.image 
+            '
+            )
+        ->setFirstResult($offSet)
+        ->setMaxResults($regPorPagina);
         $libros=$queryLibros->getResult();
-        //printf(base64_encode($libros[0]['fileData']));
         header('Content-Type: image/png');
-        //imagepng($libros[0]['fileData']);
-        //echo "<img src='".file_get_contents($libros[0]['fileData'])."'>";
-        $categorias = $em->getRepository('principalBundle:PhpposCategories')->findAll();
-        //$base64=base64_encode($libros[0]['fileData']);        
-        /*$productos= $em->createQuery(
-            'select i.*,c.*,af.* '.
-            'from Phppost_items i, Phppost_category c, Phppost_app_files af '.    
-            'where i.image_id is not null and '.     
-            'i.category_id <> 1 and '.          
-            'c.parent_id= i.category_id and '.          
-            'af.file_id=i.image_id '          
-            );*/    
+        $categorias = $em->getRepository('principalBundle:PhpposCategories')->findAll();  
         return $this->render('principalBundle:Default:index.html.twig',array(
         	'sessionActiva'=>$session->get('sessionActiva'),
         	'categorias'=>$categorias,
             'producto1'=>$libros,
-            //'base64'=>$base64,
-           
+            'trItem'=>$trItem, 
+            'totalRegPorPagina'=>$totalRegPorPagina,          
         ));
+    }
+    /*
+    * esto no es una accion, es un propiedad creada para que consiga cuantos
+    * registros existen en una tabla, en este caso sera la de items
+    */
+    public function contadorReg()
+    {
+        $cr =  $this->getDoctrine()
+               ->getManager()
+               ->createQueryBuilder('principalBundle:PhpposItems')
+               ->select('Count(i)')
+               ->from('principalBundle:PhpposItems','i')
+               ->where('i.category = 1')
+               ->getQuery()
+               ->getSingleScalarResult();
+
+        return $cr;       
     }
 
     /**
@@ -57,9 +94,7 @@ class principalController extends Controller
      */
      public function modalAction(){
         
-           return $this->render('principalBundle:Default:modalRegistrate.html.twig');
-        
-        
+           return $this->render('principalBundle:Default:modalRegistrate.html.twig');       
     }
 
     /**

@@ -62,12 +62,28 @@
                             </div>
                         </form>  
                   </div>
-                {% endfor %}                
+                {% endfor %}
+                <ul class="pagination">
+                    {%  for i in 1.. totalRegPorPagina %}
+                        {%  if loop.first %}
+                            <li>
+                                <a href="#"><</a>
+                            </li>
+                        {% endif %}
+                        <li>
+                            <a href="#">{{i}}</a>
+                        </li>
+                         {%  if loop.last %}
+                            <li>
+                                <a href="#">></a>
+                            </li>
+                        {% endif %}
+                    {%  endfor %}
+                </ul>                
             </div>
             <!-- creacion del div de contenido de producto-->
-            <div class ="col-xs-6 col-md-4">
-                
-
+            <div class ="col-xs-6 col-md-4">                
+                Cantidad de registros {{ trItem }}
             </div>
         </div>
         <!-- fin creacion de la estructura de triple div -->

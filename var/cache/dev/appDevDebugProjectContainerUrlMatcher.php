@@ -228,12 +228,8 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
         }
 
         // inicio
-        if (rtrim($pathinfo, '/') === '') {
-            if (substr($pathinfo, -1) !== '/') {
-                return $this->redirect($pathinfo.'/', 'inicio');
-            }
-
-            return array (  '_controller' => 'principalBundle\\Controller\\principalController::indexAction',  '_route' => 'inicio',);
+        if (preg_match('#^/(?P<pagina>\\d+)?$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'inicio')), array (  'pagina' => 1,  '_controller' => 'principalBundle\\Controller\\principalController::indexAction',));
         }
 
         // modal
