@@ -16,7 +16,7 @@ class principalController extends Controller
     /**
      * @Route("/{pagina}", name="inicio", requirements={"pagina": "\d+"})
      */
-    public function indexAction(Request $request,$pagina=1)
+    public function indexAction(Request $request,$pagina)
     {
         $session = $request->getSession();
         $em = $this->getDoctrine()->getManager();
@@ -50,14 +50,12 @@ class principalController extends Controller
 
         //die('total'.$trItem);
         $queryLibros= $em->createQuery(
-           'select i.name,i.unitPrice, c.name, af.fileData,af.fileName 
-            from principalBundle:PhpposItems i, principalBundle:PhpposCategories c, 
-            principalBundle:PhpposAppFiles af 
-            where i.category = 1 and           
-            c.parent= i.category and           
-            af.fileId=i.image 
-            '
+           'select i.name,i.unitPrice
+            from principalBundle:PhpposItems i
+            where i.category = 1                          
+            order by i.itemId asc'
             )
+        //->orderBy('i.itemId','ASC')
         ->setFirstResult($offSet)
         ->setMaxResults($regPorPagina);
         $libros=$queryLibros->getResult();

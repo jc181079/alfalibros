@@ -21,20 +21,20 @@ class __TwigTemplate_3bc2ec22e7d1406abf1a544f61230ce79a938139fd4ddd7b97113ce532c
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_59933c30850a7172dd2e1969c947432926d78b7dd89ac338f606dc7557e1ccda = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_59933c30850a7172dd2e1969c947432926d78b7dd89ac338f606dc7557e1ccda->enter($__internal_59933c30850a7172dd2e1969c947432926d78b7dd89ac338f606dc7557e1ccda_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "phppospeople/index.html.twig"));
+        $__internal_7c633f742e0f569aeaf41cfe67cace68ed86369872bbd1797036926918539b27 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_7c633f742e0f569aeaf41cfe67cace68ed86369872bbd1797036926918539b27->enter($__internal_7c633f742e0f569aeaf41cfe67cace68ed86369872bbd1797036926918539b27_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "phppospeople/index.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_59933c30850a7172dd2e1969c947432926d78b7dd89ac338f606dc7557e1ccda->leave($__internal_59933c30850a7172dd2e1969c947432926d78b7dd89ac338f606dc7557e1ccda_prof);
+        $__internal_7c633f742e0f569aeaf41cfe67cace68ed86369872bbd1797036926918539b27->leave($__internal_7c633f742e0f569aeaf41cfe67cace68ed86369872bbd1797036926918539b27_prof);
 
     }
 
     // line 3
     public function block_body($context, array $blocks = array())
     {
-        $__internal_31b11665c8d61caace11abb4ef3a524d80c9df0423584ecc135a2efe0b552e72 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_31b11665c8d61caace11abb4ef3a524d80c9df0423584ecc135a2efe0b552e72->enter($__internal_31b11665c8d61caace11abb4ef3a524d80c9df0423584ecc135a2efe0b552e72_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
+        $__internal_3b4ff710f6a51ecfe6a1d6eb5c33de95744ff8ff8d8602a80b9d4193f0aeb55c = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_3b4ff710f6a51ecfe6a1d6eb5c33de95744ff8ff8d8602a80b9d4193f0aeb55c->enter($__internal_3b4ff710f6a51ecfe6a1d6eb5c33de95744ff8ff8d8602a80b9d4193f0aeb55c_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
 
         // line 4
         echo "    <h1>Phppospeoples list</h1>
@@ -151,7 +151,7 @@ class __TwigTemplate_3bc2ec22e7d1406abf1a544f61230ce79a938139fd4ddd7b97113ce532c
     </ul>
 ";
         
-        $__internal_31b11665c8d61caace11abb4ef3a524d80c9df0423584ecc135a2efe0b552e72->leave($__internal_31b11665c8d61caace11abb4ef3a524d80c9df0423584ecc135a2efe0b552e72_prof);
+        $__internal_3b4ff710f6a51ecfe6a1d6eb5c33de95744ff8ff8d8602a80b9d4193f0aeb55c->leave($__internal_3b4ff710f6a51ecfe6a1d6eb5c33de95744ff8ff8d8602a80b9d4193f0aeb55c_prof);
 
     }
 
